@@ -1,5 +1,5 @@
-import { Col, Row, Typography } from 'antd';
 import styled from 'styled-components';
+import { Col, Row, Typography } from 'antd';
 
 const { Text } = Typography;
 
@@ -34,6 +34,7 @@ const Content = styled(Row)`
   height: 90px;
   border: 1px solid #000;
   opacity: 0.7;
+  padding: 0 20px;
 
   ${MenuItemWrapper}:hover & {
     opacity: 0.9;
@@ -43,12 +44,11 @@ const Content = styled(Row)`
 const Title = styled(Text)`
   font-size: 22px;
   color: #4a4a4a;
-  letter-spacing: -1.2px;
 `;
 
 const Subtitle = styled(Text)`
   font-size: 18px;
-  letter-spacing: -1px;
+  margin-top: -25px;
 `;
 
 interface MenuItemProps {
@@ -57,7 +57,11 @@ interface MenuItemProps {
   imageUrl: string;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ title, size, imageUrl }) => {
+export const MenuItem: React.FC<MenuItemProps> = ({
+  title,
+  size,
+  imageUrl,
+}) => {
   return (
     <MenuItemWrapper
       align="middle"
@@ -76,5 +80,3 @@ const MenuItem: React.FC<MenuItemProps> = ({ title, size, imageUrl }) => {
     </MenuItemWrapper>
   );
 };
-
-export default MenuItem;

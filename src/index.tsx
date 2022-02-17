@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { createGlobalStyle } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 
@@ -15,12 +16,20 @@ const GlobalStyle = createGlobalStyle`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 	}
+
+	body { 
+		font-family: 'Open Sans Condensed';
+		font-size: 16px;
+		padding: 20px 60px;
+	}
 `;
 
 ReactDOM.render(
   <>
     <GlobalStyle />
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </>,
   document.getElementById('root')
 );
