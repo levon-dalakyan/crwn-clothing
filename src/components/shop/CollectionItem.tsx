@@ -19,16 +19,6 @@ const Footer = styled(Row)`
   width: 100%;
   height: 5%;
 `;
-
-const Name = styled.div`
-  width: 90%;
-`;
-
-const Price = styled.div`
-  width: 10%;
-  text-align: right;
-`;
-
 interface CollectionItemProps {
   name: string;
   price: number;
@@ -47,8 +37,8 @@ export const CollectionItem: React.FC<CollectionItemProps> = ({
         span={24}
       />
       <Footer justify="space-between">
-        <Name>{name}</Name>
-        <Price>${price}</Price>
+        <Col>{name}</Col>
+        <Col>${price}</Col>
       </Footer>
     </CollectionItemWrapper>
   );
