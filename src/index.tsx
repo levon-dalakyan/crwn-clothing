@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
+
 import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 
 const GlobalStyle = createGlobalStyle`
-
 	html {
 	margin: 0;
   padding: 0;
@@ -21,6 +21,14 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'Open Sans Condensed';
 		font-size: 16px;
 		padding: 20px 60px;
+	}
+
+	a { 
+		text-decoration: none;
+		color: #000;
+		&:hover {
+			color: #000;
+		}
 	}
 `;
 
