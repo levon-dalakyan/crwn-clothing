@@ -27,7 +27,7 @@ module.exports = {
               '@text-color': '#121212',
               '@layout-header-background': 'transparent',
               '@layout-body-background': 'transparent',
-              '@input-hover-border-color': 'inherit',
+              '@link-color': '#000',
             },
             javascriptEnabled: true,
           },

@@ -17,12 +17,10 @@ const GlobalStyle = createGlobalStyle`
 		padding: 20px 60px;
 	}
 
-	a { 
-		text-decoration: none;
-		color: #000;
-		&:hover {
-			color: #000;
-		}
+	.input {
+		border: none;
+  	border-bottom: 1px solid #000;
+  	padding: 10px;
 	}
 `;
 

@@ -1,7 +1,9 @@
 import { Row, Typography } from 'antd';
 import styled from 'styled-components';
 import { Form, Input } from 'antd';
+
 import { CustomButton } from '../UI/CustomButton';
+import { signInWithGoogle } from '../../firebase/firebase.utils';
 
 const { Title } = Typography;
 
@@ -9,14 +11,13 @@ const SignInWrapper = styled.div`
   width: 30vw;
 `;
 
-const Subtitle = styled.span`
+const Subtitle = styled.p`
   font-size: 18px;
+  margin-bottom: 35px;
 `;
 
-const StyledInput = styled(Input)`
-  border: none;
-  border-bottom: 1px solid #000;
-  padding-bottom: 10px;
+const StyledFormItem = styled(Form.Item)`
+  margin-bottom: 30px;
 `;
 
 export const SignIn = () => {
@@ -26,16 +27,16 @@ export const SignIn = () => {
       <Subtitle>Sign in with your email and password</Subtitle>
 
       <Form>
-        <Form.Item
+        <StyledFormItem
           name="email"
           rules={[
             { type: 'email', message: 'The input is not valid Email' },
             { required: true, message: 'Please input your Email' },
           ]}
         >
-          <StyledInput placeholder="Email" />
-        </Form.Item>
-        <Form.Item
+          <Input className="input" placeholder="Email" />
+        </StyledFormItem>
+        <StyledFormItem
           name="password"
           rules={[
             {
@@ -44,11 +45,22 @@ export const SignIn = () => {
             },
           ]}
         >
-          <StyledInput placeholder="Password" />
-        </Form.Item>
+          <Input.Password
+            className="input"
+            placeholder="Password"
+            visibilityToggle
+          />
+        </StyledFormItem>
         <Row justify="space-between" align="middle">
-          <CustomButton type="submit">SIGN IN</CustomButton>
-          <CustomButton type="button" googleButton>
+          <CustomButton type="default" htmlType="submit">
+            SIGN IN
+          </CustomButton>
+          <CustomButton
+            type="primary"
+            htmlType="button"
+            onGoogleClick={signInWithGoogle}
+            googleButton
+          >
             SIGN IN WITH GOOGLE
           </CustomButton>
         </Row>

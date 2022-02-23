@@ -1,12 +1,6 @@
 import { Form, Button } from 'antd';
 import styled from 'styled-components';
 
-interface ButtonProps {
-  children: React.ReactNode;
-  type: any;
-  googleButton?: boolean;
-}
-
 const StyledButton = styled(Button)`
   height: 50px;
   min-width: 165px;
@@ -16,37 +10,48 @@ const StyledButton = styled(Button)`
   text-transform: uppercase;
   padding: 0 35px;
 
-  &.googleButton {
-  }
-
   &:hover {
     border: 1px solid #000;
-    color: black;
+    color: #000;
     background-color: #fff;
+  }
+
+  &.googleButton {
+    border: none;
+    background-color: #4285f4;
+
+    &:hover {
+      background-color: #357ae8;
+      color: #fff;
+    }
   }
 `;
 
+interface ButtonProps {
+  children: React.ReactNode;
+  htmlType: any;
+  type: any;
+  onGoogleClick?: React.MouseEventHandler<HTMLElement> | undefined;
+  googleButton?: boolean;
+}
+
 export const CustomButton: React.FC<ButtonProps> = ({
   children,
+  htmlType,
   type,
+  onGoogleClick,
   googleButton,
 }) => {
-  const [form] = Form.useForm();
-
   return (
-    <Form.Item shouldUpdate>
-      {() => (
-        <StyledButton
-          className={googleButton ? 'googleButton' : ''}
-          htmlType={type}
-          disabled={
-            !form.isFieldsTouched(true) ||
-            !!form.getFieldsError().filter(({ errors }) => errors.length).length
-          }
-        >
-          {children}
-        </StyledButton>
-      )}
+    <Form.Item>
+      <StyledButton
+        className={googleButton ? 'googleButton' : ''}
+        htmlType={htmlType}
+        type={type}
+        onClick={onGoogleClick}
+      >
+        {children}
+      </StyledButton>
     </Form.Item>
   );
 };

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import styled from 'styled-components';
@@ -6,6 +7,7 @@ import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { SignPage } from './pages/SignPage';
+import { auth } from './firebase/firebase.utils';
 
 const { Header, Content } = Layout;
 
@@ -16,10 +18,22 @@ const HeaderWrapper = styled(Header)`
 `;
 
 function App() {
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
+  useEffect(() => {
+    let unsubscribeFromAuth: any = null;
+
+    unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+
+    return () => unsubscribeFromAuth();
+  }, []);
+
   return (
     <Layout>
       <HeaderWrapper>
-        <HeaderComponent />
+        <HeaderComponent currentUser={currentUser} />
       </HeaderWrapper>
       <Content>
         <Routes>

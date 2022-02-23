@@ -1,8 +1,11 @@
-import { Col, Row } from 'antd';
+import { Col, Row, Typography } from 'antd';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { auth } from '../../firebase/firebase.utils';
+
+const { Text } = Typography;
 
 const Options = styled(Row)`
   & > a {
@@ -10,7 +13,18 @@ const Options = styled(Row)`
   }
 `;
 
-export const HeaderComponent = () => {
+const SignOutButton = styled.div`
+  cursor: pointer;
+  margin-left: 50px;
+`;
+
+interface HeaderComponentProps {
+  currentUser: any;
+}
+
+export const HeaderComponent: React.FC<HeaderComponentProps> = ({
+  currentUser,
+}) => {
   return (
     <Row justify="space-between" align="middle">
       <Col span={12}>
@@ -22,7 +36,13 @@ export const HeaderComponent = () => {
         <Options justify="end">
           <NavLink to="/shop">SHOP</NavLink>
           <NavLink to="/contact">CONTACT</NavLink>
-          <NavLink to="/sign">SIGN IN</NavLink>
+          {currentUser ? (
+            <SignOutButton onClick={() => auth.signOut()}>
+              SIGN OUT
+            </SignOutButton>
+          ) : (
+            <NavLink to="/sign">SIGN IN</NavLink>
+          )}
         </Options>
       </Col>
     </Row>
