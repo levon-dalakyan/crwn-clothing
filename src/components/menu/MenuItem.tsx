@@ -71,7 +71,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
       <BackgroundImage style={{ backgroundImage: `url(${imageUrl})` }} />
       <Content align="middle" justify="center">
         <Col span={24}>
-          <Row gutter={[18, 0]} justify="center">
+          <Row gutter={[20, 0]} justify="center">
             <Title strong>{title.toUpperCase()}</Title>
           </Row>
         </Col>

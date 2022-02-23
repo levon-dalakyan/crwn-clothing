@@ -6,7 +6,7 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 const Options = styled(Row)`
   & > a {
-    margin-left: 60px;
+    margin-left: 50px;
   }
 `;
 
@@ -22,7 +22,7 @@ export const HeaderComponent = () => {
         <Options justify="end">
           <NavLink to="/shop">SHOP</NavLink>
           <NavLink to="/contact">CONTACT</NavLink>
-          <NavLink to="/sign-in">SIGN IN</NavLink>
+          <NavLink to="/sign">SIGN IN</NavLink>
         </Options>
       </Col>
     </Row>
