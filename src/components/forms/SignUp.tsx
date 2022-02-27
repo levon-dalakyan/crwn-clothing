@@ -1,7 +1,7 @@
 import { Typography, Form, Input } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import styled from 'styled-components';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import styled from 'styled-components';
 import { CustomButton } from '../UI/CustomButton';
 
 const { Title } = Typography;
@@ -20,7 +20,9 @@ const StyledFormItem = styled(Form.Item)`
 `;
 
 export const SignUp = () => {
-  const onFinish = async (values: any) => {
+  const [form] = Form.useForm();
+
+  const formSubmitHandler = async (values: any) => {
     const { displayName, email, password, confirmPassword } = values;
 
     if (password !== confirmPassword) {
@@ -35,6 +37,8 @@ export const SignUp = () => {
         password
       );
 
+      form.resetFields();
+
       await createUserProfileDocument(user, { displayName });
     } catch (error) {
       console.error(error);
@@ -46,7 +50,7 @@ export const SignUp = () => {
       <Title level={2}>I don't have an account</Title>
       <Subtitle>Sign in with your email and password</Subtitle>
 
-      <Form onFinish={onFinish}>
+      <Form form={form} onFinish={formSubmitHandler}>
         <StyledFormItem
           name="displayName"
           rules={[{ required: true, message: 'Please input your username!' }]}

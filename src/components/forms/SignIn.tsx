@@ -1,8 +1,9 @@
 import { Row, Typography, Form, Input } from 'antd';
 import styled from 'styled-components';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import { CustomButton } from '../UI/CustomButton';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
 
 const { Title } = Typography;
 
@@ -20,12 +21,26 @@ const StyledFormItem = styled(Form.Item)`
 `;
 
 export const SignIn = () => {
+  const [form] = Form.useForm();
+
+  const formSubmitHandler = async (values: any) => {
+    const { email, password } = values;
+
+    try {
+      signInWithEmailAndPassword(auth, email, password);
+
+      form.resetFields();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <SignInWrapper>
       <Title level={2}>I already have an account</Title>
       <Subtitle>Sign in with your email and password</Subtitle>
 
-      <Form>
+      <Form form={form} onFinish={formSubmitHandler}>
         <StyledFormItem
           name="email"
           rules={[
