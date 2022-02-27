@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import styled from 'styled-components';
+import { onSnapshot, DocumentSnapshot } from 'firebase/firestore';
 
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { SignPage } from './pages/SignPage';
-import { auth } from './firebase/firebase.utils';
 
 const { Header, Content } = Layout;
 
@@ -23,8 +24,16 @@ function App() {
   useEffect(() => {
     let unsubscribeFromAuth: any = null;
 
-    unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef: any = await createUserProfileDocument(userAuth);
+
+        onSnapshot(userRef, (snapshot: DocumentSnapshot) => {
+          setCurrentUser({ id: snapshot.id, ...snapshot.data() });
+        });
+      }
+
+      setCurrentUser(userAuth);
     });
 
     return () => unsubscribeFromAuth();

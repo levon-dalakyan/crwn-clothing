@@ -1,6 +1,5 @@
-import { Row, Typography } from 'antd';
+import { Row, Typography, Form, Input } from 'antd';
 import styled from 'styled-components';
-import { Form, Input } from 'antd';
 
 import { CustomButton } from '../UI/CustomButton';
 import { signInWithGoogle } from '../../firebase/firebase.utils';

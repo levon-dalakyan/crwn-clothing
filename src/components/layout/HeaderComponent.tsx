@@ -1,11 +1,9 @@
-import { Col, Row, Typography } from 'antd';
+import { Col, Row } from 'antd';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
-
-const { Text } = Typography;
 
 const Options = styled(Row)`
   & > a {
