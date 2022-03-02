@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Layout } from 'antd';
+import { useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Layout, Row } from 'antd';
 import styled from 'styled-components';
 import { onSnapshot, DocumentSnapshot } from 'firebase/firestore';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { setCurrentUser } from './store/user-slice';
+import { useAppDispatch, useAppSelector } from './hooks';
+
 import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
@@ -19,7 +22,8 @@ const HeaderWrapper = styled(Header)`
 `;
 
 function App() {
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   useEffect(() => {
     let unsubscribeFromAuth: any = null;
@@ -29,11 +33,11 @@ function App() {
         const userRef: any = await createUserProfileDocument(userAuth);
 
         onSnapshot(userRef, (snapshot: DocumentSnapshot) => {
-          setCurrentUser({ id: snapshot.id, ...snapshot.data() });
+          dispatch(setCurrentUser({ id: snapshot.id, ...snapshot.data() }));
         });
       }
 
-      setCurrentUser(userAuth);
+      dispatch(setCurrentUser(userAuth));
     });
 
     return () => unsubscribeFromAuth();
@@ -42,13 +46,16 @@ function App() {
   return (
     <Layout>
       <HeaderWrapper>
-        <HeaderComponent currentUser={currentUser} />
+        <HeaderComponent />
       </HeaderWrapper>
       <Content>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/sign" element={<SignPage />} />
+          <Route
+            path="/sign"
+            element={currentUser ? <Navigate to="/" /> : <SignPage />}
+          />
         </Routes>
       </Content>
     </Layout>

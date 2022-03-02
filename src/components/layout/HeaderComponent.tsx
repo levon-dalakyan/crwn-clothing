@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
+import { useAppSelector } from '../../hooks';
 
 const Options = styled(Row)`
   & > a {
@@ -16,13 +17,9 @@ const SignOutButton = styled.div`
   margin-left: 50px;
 `;
 
-interface HeaderComponentProps {
-  currentUser: any;
-}
+export const HeaderComponent = () => {
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
-export const HeaderComponent: React.FC<HeaderComponentProps> = ({
-  currentUser,
-}) => {
   return (
     <Row justify="space-between" align="middle">
       <Col span={12}>
