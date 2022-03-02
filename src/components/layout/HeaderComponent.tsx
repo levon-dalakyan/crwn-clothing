@@ -6,6 +6,8 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 import { useAppSelector } from '../../hooks';
 
+import { CartDropdown } from '../cart-dropdown/CartDropdown';
+
 const Options = styled(Row)`
   & > a {
     margin-left: 50px;
@@ -28,7 +30,7 @@ export const HeaderComponent = () => {
         </Link>
       </Col>
       <Col span={12}>
-        <Options justify="end">
+        <Options justify="end" align="middle">
           <NavLink to="/shop">SHOP</NavLink>
           <NavLink to="/contact">CONTACT</NavLink>
           {currentUser ? (
@@ -38,6 +40,7 @@ export const HeaderComponent = () => {
           ) : (
             <NavLink to="/sign">SIGN IN</NavLink>
           )}
+          <CartDropdown />
         </Options>
       </Col>
     </Row>
