@@ -28,12 +28,7 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = ({
         {items
           .filter((item, idx) => idx < 4)
           .map((item) => (
-            <CollectionItem
-              key={item.id}
-              name={item.name}
-              price={item.price}
-              imageUrl={item.imageUrl}
-            />
+            <CollectionItem key={item.id} item={item} />
           ))}
       </Row>
     </CollectionPreviewWrapper>

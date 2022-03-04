@@ -25,30 +25,42 @@ const StyledButton = styled(Button)`
       color: #fff;
     }
   }
+
+  &.inverted {
+    background-color: #fff;
+    color: #000;
+    &:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  }
 `;
 
 interface ButtonProps {
   children: React.ReactNode;
   htmlType: any;
   type: any;
-  onGoogleClick?: React.MouseEventHandler<HTMLElement> | undefined;
+  onClick?: React.MouseEventHandler<HTMLElement>;
   googleButton?: boolean;
+  inverted?: boolean;
 }
 
 export const CustomButton: React.FC<ButtonProps> = ({
   children,
   htmlType,
   type,
-  onGoogleClick,
+  onClick,
   googleButton,
+  inverted,
 }) => {
   return (
     <Form.Item>
       <StyledButton
-        className={googleButton ? 'googleButton' : ''}
+        className={`${googleButton ? 'googleButton' : ''}
+				 ${inverted ? 'inverted' : ''}`}
         htmlType={htmlType}
         type={type}
-        onClick={onGoogleClick}
+        onClick={onClick}
       >
         {children}
       </StyledButton>

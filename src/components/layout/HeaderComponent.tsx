@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/redux-hooks';
 
 import { CartDropdown } from '../cart-dropdown/CartDropdown';
 

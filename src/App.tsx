@@ -6,7 +6,7 @@ import { onSnapshot, DocumentSnapshot } from 'firebase/firestore';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './store/user-slice';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
 
 import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';

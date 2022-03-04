@@ -72,7 +72,7 @@ export const SignIn = () => {
           <CustomButton
             type="primary"
             htmlType="button"
-            onGoogleClick={signInWithGoogle}
+            onClick={signInWithGoogle}
             googleButton
           >
             SIGN IN WITH GOOGLE
