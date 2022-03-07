@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Layout, Row } from 'antd';
+import { Layout } from 'antd';
 import styled from 'styled-components';
 import { onSnapshot, DocumentSnapshot } from 'firebase/firestore';
 
@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { SignPage } from './pages/SignPage';
+import { CheckoutPage } from './pages/CheckoutPage';
 
 const { Header, Content } = Layout;
 
@@ -52,6 +53,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
           <Route
             path="/sign"
             element={currentUser ? <Navigate to="/" /> : <SignPage />}

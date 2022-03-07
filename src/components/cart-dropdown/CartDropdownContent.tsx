@@ -1,4 +1,5 @@
 import { Row } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '../../hooks/redux-hooks';
 
@@ -18,6 +19,11 @@ const CartItems = styled(Row)`
   overflow: auto;
 `;
 
+const Empty = styled.span`
+  font-size: 18px;
+  margin: 50px auto;
+`;
+
 const ButtonWrapper = styled(Row)`
   width: 100%;
 
@@ -26,19 +32,34 @@ const ButtonWrapper = styled(Row)`
   }
 `;
 
-export const CartDropdownContent = () => {
+export const CartDropdownContent: React.FC<{
+  setVisibility: () => void;
+}> = ({ setVisibility }) => {
+  const navigate = useNavigate();
+
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
   return (
     <Wrapper>
-      <CartItems align="top">
-        {cartItems.map((cartItem) => (
-          <CartDropdownItem key={cartItem.id} item={cartItem} />
-        ))}
-      </CartItems>
+      {cartItems.length ? (
+        <CartItems align="top">
+          {cartItems.map((cartItem) => (
+            <CartDropdownItem key={cartItem.id} item={cartItem} />
+          ))}
+        </CartItems>
+      ) : (
+        <Empty>Your cart is empty</Empty>
+      )}
 
       <ButtonWrapper justify="center" align="bottom">
-        <CustomButton htmlType="button" type="primary">
+        <CustomButton
+          onClick={() => {
+            navigate('/checkout');
+            setVisibility();
+          }}
+          htmlType="button"
+          type="primary"
+        >
           GO TO CHECKOUT
         </CustomButton>
       </ButtonWrapper>

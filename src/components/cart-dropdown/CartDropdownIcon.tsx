@@ -2,6 +2,7 @@ import { Row } from 'antd';
 import styled from 'styled-components';
 
 import { ReactComponent as ShoppingBag } from '../../assets/shopping-bag.svg';
+import { useAppSelector } from '../../hooks/redux-hooks';
 
 const Wrapper = styled(Row)`
   width: 45px;
@@ -23,10 +24,18 @@ const Counter = styled.span`
 `;
 
 export const CartIcon = ({ ...props }) => {
+  const itemQuantity = useAppSelector((state) =>
+    state.cart.cartItems.reduce(
+      (accumulatedQuantity, cartItem) =>
+        accumulatedQuantity + cartItem.quantity,
+      0
+    )
+  );
+
   return (
     <Wrapper {...props} justify="center" align="middle">
       <ShoppingBagIcon />
-      <Counter>0</Counter>
+      <Counter>{itemQuantity}</Counter>
     </Wrapper>
   );
 };

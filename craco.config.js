@@ -28,6 +28,7 @@ module.exports = {
               '@layout-header-background': 'transparent',
               '@layout-body-background': 'transparent',
               '@link-color': '#000',
+              '@divider-color': '#646464',
             },
             javascriptEnabled: true,
           },
