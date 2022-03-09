@@ -21,6 +21,7 @@ const Counter = styled.span`
   font-size: 12px;
   bottom: 2px;
   font-weight: bold;
+  user-select: none;
 `;
 
 export const CartIcon = ({ ...props }) => {

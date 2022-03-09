@@ -18,3 +18,22 @@ export const sortAddItemToCart = (
 
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemIfQuantityValue = (
+  cartItems: CartItemType[],
+  cartItemToRemove: CartItemType
+) => {
+  const existedCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemToRemove.id
+  );
+
+  if (existedCartItem?.quantity === 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== existedCartItem.id);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === existedCartItem?.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
