@@ -12,6 +12,7 @@ const CollectionItemWrapper = styled(Row)`
   height: 350px;
   width: 22%;
   position: relative;
+  margin-bottom: 60px;
 `;
 
 const BackgroundImage = styled(Col)`
@@ -50,11 +51,9 @@ const ButtonWrapper = styled(Row)`
   }
 `;
 
-interface CollectionItemProps {
-  item: CollectionItemType;
-}
-
-export const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
+export const CollectionItem: React.FC<{ item: CollectionItemType }> = ({
+  item,
+}) => {
   const dispatch = useAppDispatch();
 
   const { name, price, imageUrl } = item;

@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 import { Row } from 'antd';
+import Title from 'antd/lib/typography/Title';
 
 import { CollectionItemType } from '../../pages/ShopPage';
 import { CollectionItem } from './CollectionItem';
+import { Link } from 'react-router-dom';
 
-const CollectionPreviewWrapper = styled.div`
-  margin-bottom: 50px;
-`;
-
-const Title = styled.h2`
-  font-size: 28px;
+const TitleStyled = styled(Title)`
+  font-size: 26px;
 `;
 
 interface CollectionPreviewProps {
@@ -22,8 +20,10 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = ({
   items,
 }) => {
   return (
-    <CollectionPreviewWrapper>
-      <Title>{title}</Title>
+    <>
+      <Link to={`/shop/${title.toLowerCase()}`}>
+        <TitleStyled level={2}>{title.toUpperCase()}</TitleStyled>
+      </Link>
       <Row justify="space-between" align="middle">
         {items
           .filter((item, idx) => idx < 4)
@@ -31,6 +31,6 @@ export const CollectionPreview: React.FC<CollectionPreviewProps> = ({
             <CollectionItem key={item.id} item={item} />
           ))}
       </Row>
-    </CollectionPreviewWrapper>
+    </>
   );
 };

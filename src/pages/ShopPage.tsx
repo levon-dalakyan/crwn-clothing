@@ -1,9 +1,7 @@
-import { Typography } from 'antd';
-
+import { Route, Routes } from 'react-router-dom';
+import { CollectionsOverview } from '../components/shop/CollectionsOverview';
 import { SHOP_DATA } from '../components/shop/shop-data';
-import { CollectionPreview } from '../components/shop/CollectionPreview';
-
-const { Title } = Typography;
+import { CollectionPage } from './CollectionPage';
 
 export interface CollectionItemType {
   id: number;
@@ -12,7 +10,7 @@ export interface CollectionItemType {
   price: number;
 }
 
-interface CollectionType {
+export interface CollectionType {
   id: number;
   title: string;
   routeName: string;
@@ -23,15 +21,15 @@ const COLLECTIONS: CollectionType[] = SHOP_DATA;
 
 export const ShopPage = () => {
   return (
-    <>
-      <Title>Collections</Title>
-      {COLLECTIONS.map((collection) => (
-        <CollectionPreview
-          key={collection.id}
-          title={collection.title}
-          items={collection.items}
-        />
-      ))}
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={<CollectionsOverview collections={COLLECTIONS} />}
+      />
+      <Route
+        path="/:collectionId"
+        element={<CollectionPage collections={COLLECTIONS} />}
+      />
+    </Routes>
   );
 };
