@@ -19,13 +19,13 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export const auth = getAuth();
-export const db = getFirestore();
-
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
-export const signInWithGoogle = () => signInWithPopup(auth, provider);
+export const auth = getAuth();
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
+export const db = getFirestore();
 
 export const createUserProfileDocument = async (
   userAuth: User | null,
@@ -37,7 +37,7 @@ export const createUserProfileDocument = async (
   const userSnap = await getDoc(userRef);
 
   if (!userSnap.exists()) {
-    const { displayName, email, photoURL } = userAuth;
+    const { displayName, email } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -45,11 +45,10 @@ export const createUserProfileDocument = async (
         createdAt,
         displayName,
         email,
-        photoURL,
         ...additionalData,
       });
     } catch (error: any) {
-      console.error('error creating user', error.message);
+      console.log('error creating user', error.message);
     }
   }
 

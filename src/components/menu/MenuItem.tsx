@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { Col, Row, Typography } from 'antd';
+import { Col, Row } from 'antd';
+import Text from 'antd/lib/typography/Text';
+import { useNavigate } from 'react-router-dom';
 
-const { Text } = Typography;
+import { SectionType } from './Menu';
 
 const MenuItemWrapper = styled(Row)`
   min-width: 30%;
@@ -51,22 +53,17 @@ const Subtitle = styled(Text)`
   margin-top: -25px;
 `;
 
-interface MenuItemProps {
-  title: string;
-  size: string | undefined;
-  imageUrl: string;
-}
+export const MenuItem: React.FC<{ section: SectionType }> = ({ section }) => {
+  const navigate = useNavigate();
 
-export const MenuItem: React.FC<MenuItemProps> = ({
-  title,
-  size,
-  imageUrl,
-}) => {
+  const { title, size, linkUrl, imageUrl } = section;
+
   return (
     <MenuItemWrapper
       align="middle"
       justify="center"
       className={size ? size : ''}
+      onClick={() => navigate(`${linkUrl}`)}
     >
       <BackgroundImage style={{ backgroundImage: `url(${imageUrl})` }} />
       <Content align="middle" justify="center">

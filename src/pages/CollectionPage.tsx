@@ -1,26 +1,37 @@
 import { Row } from 'antd';
-import { useParams } from 'react-router-dom';
+import { Params, useParams } from 'react-router-dom';
+import Title from 'antd/lib/typography/Title';
+import styled from 'styled-components';
 
-import { selectCollection } from '../utils/shop-utils';
+import { CollectionsType, CollectionType } from './ShopPage';
 
-import { CollectionType } from './ShopPage';
 import { CollectionItem } from '../components/shop/CollectionItem';
 
-export const CollectionPage: React.FC<{ collections: CollectionType[] }> = ({
+const Wrapper = styled.div`
+  margin-bottom: 50px;
+`;
+
+const Items = styled(Row)`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 30px;
+`;
+
+export const CollectionPage: React.FC<{ collections: any }> = ({
   collections,
 }) => {
-  const params = useParams();
+  const params: any = useParams();
 
-  const selectedCollection: CollectionType | undefined = selectCollection(
-    collections,
-    params.collectionId
-  );
+  const collection = collections[params.collectionId];
 
   return (
-    <Row justify="space-between">
-      {selectedCollection?.items.map((item) => (
-        <CollectionItem item={item} />
-      ))}
-    </Row>
+    <Wrapper>
+      <Title level={2}>{collection.title.toUpperCase()}</Title>
+      <Items gutter={[0, 60]}>
+        {collection.items.map((item: any) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </Items>
+    </Wrapper>
   );
 };

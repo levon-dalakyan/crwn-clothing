@@ -17,7 +17,15 @@ export interface CollectionType {
   items: CollectionItemType[];
 }
 
-const COLLECTIONS: CollectionType[] = SHOP_DATA;
+export interface CollectionsType {
+  hats: CollectionType;
+  sneakers: CollectionType;
+  jackets: CollectionType;
+  womens: CollectionType;
+  mens: CollectionType;
+}
+
+const COLLECTIONS: CollectionsType = SHOP_DATA;
 
 export const ShopPage = () => {
   return (

@@ -1,11 +1,15 @@
-import { Row, Typography, Form, Input } from 'antd';
+import { Row, Form, Input } from 'antd';
 import styled from 'styled-components';
+import Title from 'antd/lib/typography/Title';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import {
+  auth,
+  createUserProfileDocument,
+  signInWithGooglePopup,
+} from '../../utils/firebase-utils';
 
 import { CustomButton } from '../UI/CustomButton';
-
-const { Title } = Typography;
+import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
 
 const SignInWrapper = styled.div`
   width: 30vw;
@@ -21,6 +25,15 @@ const StyledFormItem = styled(Form.Item)`
 `;
 
 export const SignIn = () => {
+  const googleSignInHandler = async () => {
+    const { user } = await signInWithGooglePopup();
+    const userRef: any = await createUserProfileDocument(user);
+
+    onSnapshot(userRef, (snapshot: DocumentSnapshot) =>
+      console.log(snapshot.data())
+    );
+  };
+
   const [form] = Form.useForm();
 
   const formSubmitHandler = async (values: any) => {
@@ -30,8 +43,8 @@ export const SignIn = () => {
       signInWithEmailAndPassword(auth, email, password);
 
       form.resetFields();
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.log(error.message);
     }
   };
 
@@ -72,7 +85,7 @@ export const SignIn = () => {
           <CustomButton
             type="primary"
             htmlType="button"
-            onClick={signInWithGoogle}
+            onClick={googleSignInHandler}
             googleButton
           >
             SIGN IN WITH GOOGLE

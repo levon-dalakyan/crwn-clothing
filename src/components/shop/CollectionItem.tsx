@@ -10,9 +10,8 @@ import { useAppDispatch } from '../../hooks/redux-hooks';
 
 const CollectionItemWrapper = styled(Row)`
   height: 350px;
-  width: 22%;
+  width: 20vw;
   position: relative;
-  margin-bottom: 60px;
 `;
 
 const BackgroundImage = styled(Col)`
@@ -56,11 +55,11 @@ export const CollectionItem: React.FC<{ item: CollectionItemType }> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const { name, price, imageUrl } = item;
-
   const addItemToCartHandler = () => {
     dispatch(addItemToCart(item));
   };
+
+  const { name, price, imageUrl } = item;
 
   return (
     <CollectionItemWrapper>

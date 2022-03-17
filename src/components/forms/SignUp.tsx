@@ -1,6 +1,6 @@
 import { Typography, Form, Input } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { auth, createUserProfileDocument } from '../../utils/firebase-utils';
 import styled from 'styled-components';
 import { CustomButton } from '../UI/CustomButton';
 
