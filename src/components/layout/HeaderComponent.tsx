@@ -8,6 +8,10 @@ import { useAppSelector } from '../../hooks/redux-hooks';
 
 import { CartDropdown } from '../cart-dropdown/CartDropdown';
 
+const Wrapper = styled(Row)`
+  margin-bottom: 20px;
+`;
+
 const Options = styled(Row)`
   & > a {
     margin-left: 50px;
@@ -23,7 +27,7 @@ export const HeaderComponent = () => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
-    <Row justify="space-between" align="middle">
+    <Wrapper justify="space-between" align="middle">
       <Col span={12}>
         <Link to="/">
           <Logo />
@@ -43,6 +47,6 @@ export const HeaderComponent = () => {
           <CartDropdown />
         </Options>
       </Col>
-    </Row>
+    </Wrapper>
   );
 };

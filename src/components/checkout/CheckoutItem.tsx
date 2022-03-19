@@ -25,6 +25,7 @@ const Center = styled(Col)`
 
 const Quantity = styled(Row)`
   text-align: center;
+  user-select: none;
 `;
 
 const Arrow = styled(Col)`
@@ -34,6 +35,7 @@ const Arrow = styled(Col)`
 
 const Remove = styled(Col)`
   text-align: right;
+  user-select: none;
   cursor: pointer;
 `;
 

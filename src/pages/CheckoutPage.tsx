@@ -13,10 +13,6 @@ const Header = styled(Row)`
   line-height: 20px;
 `;
 
-const Remove = styled(Col)`
-  cursor: pointer;
-`;
-
 const Total = styled.div`
   width: 100%;
   margin-top: 50px;
@@ -41,7 +37,7 @@ export const CheckoutPage = () => {
         <Col span={5}>Description</Col>
         <Col span={6}>Quantity</Col>
         <Col span={4}>Price</Col>
-        <Remove>Remove</Remove>
+        <Col>Remove</Col>
       </Header>
       <Divider />
       <Row>
