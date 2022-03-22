@@ -1,4 +1,5 @@
 import { Form, Button } from 'antd';
+import { ButtonHTMLType, ButtonType } from 'antd/lib/button/button';
 import styled from 'styled-components';
 
 const StyledButton = styled(Button)`
@@ -16,7 +17,7 @@ const StyledButton = styled(Button)`
     background-color: #fff;
   }
 
-  &.googleButton {
+  &.google-sign-in {
     border: none;
     background-color: #4285f4;
 
@@ -36,13 +37,17 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const BUTTON_STYLE_CLASSES: any = {
+  google: 'google-sign-in',
+  inverted: 'inverted',
+};
+
 interface ButtonProps {
   children: React.ReactNode;
-  htmlType: any;
-  type: any;
+  htmlType: ButtonHTMLType;
+  type: ButtonType;
   onClick?: React.MouseEventHandler<HTMLElement>;
-  googleButton?: boolean;
-  inverted?: boolean;
+  buttonStyle?: string;
 }
 
 export const CustomButton: React.FC<ButtonProps> = ({
@@ -50,14 +55,12 @@ export const CustomButton: React.FC<ButtonProps> = ({
   htmlType,
   type,
   onClick,
-  googleButton,
-  inverted,
+  buttonStyle,
 }) => {
   return (
     <Form.Item>
       <StyledButton
-        className={`${googleButton ? 'googleButton' : ''}
-				 ${inverted ? 'inverted' : ''}`}
+        className={`${buttonStyle && BUTTON_STYLE_CLASSES[buttonStyle]}`}
         htmlType={htmlType}
         type={type}
         onClick={onClick}

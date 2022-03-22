@@ -102,7 +102,7 @@ export const SignIn = () => {
             type="primary"
             htmlType="button"
             onClick={googleSignInHandler}
-            googleButton
+            buttonStyle="google"
           >
             SIGN IN WITH GOOGLE
           </CustomButton>

@@ -73,10 +73,10 @@ export const CollectionItem: React.FC<{ item: CollectionItemType }> = ({
       </Footer>
       <ButtonWrapper justify="center">
         <CustomButton
-          onClick={addItemToCartHandler}
           htmlType="button"
           type="primary"
-          inverted
+          onClick={addItemToCartHandler}
+          buttonStyle="inverted"
         >
           ADD TO CART
         </CustomButton>

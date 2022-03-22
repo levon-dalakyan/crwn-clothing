@@ -53,12 +53,12 @@ export const CartDropdownContent: React.FC<{
 
       <ButtonWrapper justify="center" align="bottom">
         <CustomButton
+          htmlType="button"
+          type="primary"
           onClick={() => {
             navigate('/checkout');
             setVisibility();
           }}
-          htmlType="button"
-          type="primary"
         >
           GO TO CHECKOUT
         </CustomButton>
