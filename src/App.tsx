@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { onSnapshot, DocumentSnapshot } from 'firebase/firestore';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
 
-import { auth, createUserProfileDocument } from './utils/firebase-utils';
-import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
-import { setCurrentUser } from './store/user-slice';
+import { useAppSelector } from './hooks/redux-hooks';
 
 import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';

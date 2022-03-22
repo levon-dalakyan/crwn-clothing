@@ -2,14 +2,14 @@ import { Row, Form, Input } from 'antd';
 import styled from 'styled-components';
 import Title from 'antd/lib/typography/Title';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+
 import {
   auth,
   createUserProfileDocument,
   signInWithGooglePopup,
 } from '../../utils/firebase-utils';
-import { toast, ToastContainer } from 'react-toastify';
+import { showNotification } from '../../utils/notification-utils';
 
-import WavingHand from '../../assets/waving-hand.png';
 import { CustomButton } from '../UI/CustomButton';
 import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
 
@@ -26,38 +26,12 @@ const StyledFormItem = styled(Form.Item)`
   margin-bottom: 30px;
 `;
 
-const notify = (param: string, displayName: string | null) => {
-  if (param === 'welcome') {
-    toast.success(`Welcome${displayName ? `, ${displayName}` : ' here'}!`, {
-      icon: () => (
-        <img style={{ width: '20px' }} src={WavingHand} alt="waving hand" />
-      ),
-      toastId: 'welcome',
-      containerId: 'sign-in',
-    });
-  } else if (param === 'wrong-password') {
-    if (!toast.isActive('sign-in')) {
-      toast.error('Wrong email or password', {
-        toastId: 'wrong-inputs',
-        containerId: 'sign-in',
-      });
-    }
-  } else if (param === 'requests-limit') {
-    if (!toast.isActive('requests')) {
-      toast.error('Too many requests, try again later', {
-        toastId: 'requests',
-        containerId: 'sign-in',
-      });
-    }
-  }
-};
-
 export const SignIn = () => {
   const googleSignInHandler = async () => {
     const { user } = await signInWithGooglePopup();
 
     if (user) {
-      notify('welcome', user.displayName);
+      showNotification('success', '', user.displayName);
     }
 
     const userRef: any = await createUserProfileDocument(user);
@@ -76,34 +50,23 @@ export const SignIn = () => {
       const response = await signInWithEmailAndPassword(auth, email, password);
 
       if (response) {
-        notify('welcome', null);
+        showNotification('success', '', 'here');
       }
 
       form.resetFields();
     } catch ({ code }) {
-      console.log({ code });
-
       if (code === 'auth/wrong-password') {
-        notify('wrong-password', null);
+        showNotification('error', 'Wrong email or password');
+      } else if (code === 'auth/user-not-found') {
+        showNotification('error', 'This email is not registered');
       } else if (code === 'auth/too-many-requests') {
-        notify('requests-limit', null);
+        showNotification('error', 'Too many requests, try again later');
       }
     }
   };
 
   return (
     <Wrapper>
-      <ToastContainer
-        style={{ width: 'auto' }}
-        enableMultiContainer
-        containerId={'sign-in'}
-        position={'top-left'}
-        limit={1}
-        closeButton={false}
-        pauseOnFocusLoss={false}
-        autoClose={3000}
-        hideProgressBar={true}
-      />
       <Title level={2}>I already have an account</Title>
       <Subtitle>Sign in with your email and password</Subtitle>
       <Form form={form} onFinish={formSubmitHandler}>
