@@ -7,7 +7,7 @@ import { useAppSelector } from './hooks/redux-hooks';
 import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
-import { SignPage } from './pages/SignPage';
+import { AuthenticationPage } from './pages/AuthenticationPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 
 const HeaderWrapper = styled(Header)`
@@ -46,11 +46,11 @@ function App() {
       <Content>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/shop/*" element={<ShopPage />} />
+          <Route path="shop/*" element={<ShopPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route
-            path="/sign"
-            element={currentUser ? <Navigate to="/" /> : <SignPage />}
+            path="auth"
+            element={currentUser ? <Navigate to="/" /> : <AuthenticationPage />}
           />
         </Routes>
       </Content>

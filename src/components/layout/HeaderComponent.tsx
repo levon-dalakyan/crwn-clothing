@@ -42,7 +42,7 @@ export const HeaderComponent = () => {
               SIGN OUT
             </SignOutButton>
           ) : (
-            <NavLink to="/sign">SIGN IN</NavLink>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
           <CartDropdown />
         </Options>
