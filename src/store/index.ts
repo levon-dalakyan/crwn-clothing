@@ -4,8 +4,8 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 
-import { cartSlice } from './cart-slice';
 import { userSlice } from './user-slice';
+import { cartSlice } from './cart-slice';
 
 const reducers = combineReducers({
   user: userSlice.reducer,

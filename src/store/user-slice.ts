@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { User } from 'firebase/auth';
 
 interface UserStateType {
-  currentUser: any;
+  currentUser: User | null;
 }
 
 const initialState: UserStateType = {

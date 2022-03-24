@@ -2,9 +2,9 @@ import { Col, Row } from 'antd';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../utils/firebase-utils';
 import { useAppSelector } from '../../hooks/redux-hooks';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import { CartDropdown } from '../cart-dropdown/CartDropdown';
 

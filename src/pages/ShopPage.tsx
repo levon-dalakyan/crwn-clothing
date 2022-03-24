@@ -21,8 +21,8 @@ export interface CollectionsType {
   hats: CollectionType;
   sneakers: CollectionType;
   jackets: CollectionType;
-  womens: CollectionType;
-  mens: CollectionType;
+  women: CollectionType;
+  men: CollectionType;
 }
 
 const COLLECTIONS: CollectionsType = SHOP_DATA;

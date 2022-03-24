@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
+import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
-import { useAppSelector } from './hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
+import { auth, createUserProfileDocument } from './utils/firebase-utils';
+import { setCurrentUser } from './store/user-slice';
 
 import { HeaderComponent } from './components/layout/HeaderComponent';
 import { HomePage } from './pages/HomePage';
@@ -17,26 +22,20 @@ const HeaderWrapper = styled(Header)`
 `;
 
 function App() {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
-  // useEffect(() => {
-  //   let unsubscribeFromAuth: any = null;
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        createUserProfileDocument(userAuth);
+      }
 
-  //   unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-  //     if (userAuth) {
-  //       const userRef: any = await createUserProfileDocument(userAuth);
+      dispatch(setCurrentUser(userAuth));
+    });
 
-  //       onSnapshot(userRef, (snapshot: DocumentSnapshot) => {
-  //         dispatch(setCurrentUser({ id: snapshot.id, ...snapshot.data() }));
-  //       });
-  //     }
-
-  //     dispatch(setCurrentUser(userAuth));
-  //   });
-
-  //   return () => unsubscribeFromAuth();
-  // }, []);
+    return unsubscribe;
+  }, []);
 
   return (
     <Layout>

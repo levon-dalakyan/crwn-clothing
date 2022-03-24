@@ -2,14 +2,9 @@ import { Row, Form, Input } from 'antd';
 import styled from 'styled-components';
 import Title from 'antd/lib/typography/Title';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
 
 import { showNotification } from '../../utils/notification-utils';
-import {
-  auth,
-  createUserProfileDocument,
-  signInWithGooglePopup,
-} from '../../utils/firebase-utils';
+import { auth, signInWithGooglePopup } from '../../utils/firebase-utils';
 
 import { CustomButton } from '../UI/CustomButton';
 
@@ -26,22 +21,16 @@ const StyledFormItem = styled(Form.Item)`
   margin-bottom: 30px;
 `;
 
-const googleSignInHandler = async () => {
-  const { user } = await signInWithGooglePopup();
-
-  if (user) {
-    showNotification('success', '', user.displayName);
-  }
-
-  const userRef: any = await createUserProfileDocument(user);
-
-  onSnapshot(userRef, (snapshot: DocumentSnapshot) =>
-    console.log(snapshot.data())
-  );
-};
-
 export const SignIn = () => {
   const [form] = Form.useForm();
+
+  const googleSignInHandler = async () => {
+    const { user } = await signInWithGooglePopup();
+
+    if (user) {
+      showNotification('success', '', user.displayName);
+    }
+  };
 
   const formSubmitHandler = async (values: any) => {
     const { email, password } = values;

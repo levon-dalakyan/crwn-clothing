@@ -2,6 +2,7 @@ import { notification } from 'antd';
 
 notification.config({
   maxCount: 1,
+  placement: 'topLeft',
 });
 
 export const showNotification = (

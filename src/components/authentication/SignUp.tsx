@@ -39,7 +39,7 @@ export const SignUp = () => {
         password
       );
 
-      await createUserProfileDocument(user, { displayName });
+      createUserProfileDocument(user, { displayName });
 
       showNotification('success', 'You have successfully registered!');
 

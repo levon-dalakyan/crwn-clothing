@@ -1,9 +1,7 @@
 import { Row } from 'antd';
-import { Params, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Title from 'antd/lib/typography/Title';
 import styled from 'styled-components';
-
-import { CollectionsType, CollectionType } from './ShopPage';
 
 import { CollectionItem } from '../components/shop/CollectionItem';
 
