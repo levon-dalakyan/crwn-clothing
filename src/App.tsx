@@ -2,11 +2,15 @@ import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
-import { DocumentSnapshot, onSnapshot } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
-import { auth, createUserProfileDocument } from './utils/firebase-utils';
+import {
+  addCollectionAndDocuments,
+  auth,
+  createUserProfileDocument,
+  getCategoriesAndDocuments,
+} from './utils/firebase-utils';
 import { setCurrentUser } from './store/user-slice';
 
 import { HeaderComponent } from './components/layout/HeaderComponent';
@@ -14,6 +18,7 @@ import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { AuthenticationPage } from './pages/AuthenticationPage';
 import { CheckoutPage } from './pages/CheckoutPage';
+import { SHOP_DATA } from './components/shop/shop-data';
 
 const HeaderWrapper = styled(Header)`
   padding: 0 20px;
@@ -35,6 +40,16 @@ function App() {
     });
 
     return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoriesMap = await getCategoriesAndDocuments();
+
+      console.log(categoriesMap);
+    };
+
+    getCategoriesMap();
   }, []);
 
   return (
