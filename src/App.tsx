@@ -1,26 +1,25 @@
 import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Layout, { Content, Header } from 'antd/lib/layout/layout';
+import Layout, { Content, Header as AntHeader } from 'antd/lib/layout/layout';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
 import {
-  addCollectionAndDocuments,
   auth,
   createUserProfileDocument,
   getCategoriesAndDocuments,
 } from './utils/firebase-utils';
 import { setCurrentUser } from './store/user-slice';
 
-import { HeaderComponent } from './components/layout/HeaderComponent';
+import { Navigation } from './components/layout/Navigation';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { AuthenticationPage } from './pages/AuthenticationPage';
 import { CheckoutPage } from './pages/CheckoutPage';
-import { SHOP_DATA } from './components/shop/shop-data';
+import { setCategories } from './store/category-slice';
 
-const HeaderWrapper = styled(Header)`
+const Header = styled(AntHeader)`
   padding: 0 20px;
   line-height: 35px;
   font-size: 18px;
@@ -40,23 +39,23 @@ function App() {
     });
 
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoriesMap = await getCategoriesAndDocuments();
 
-      console.log(categoriesMap);
+      dispatch(setCategories(categoriesMap));
     };
 
     getCategoriesMap();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Layout>
-      <HeaderWrapper>
-        <HeaderComponent />
-      </HeaderWrapper>
+      <Header>
+        <Navigation />
+      </Header>
       <Content>
         <Routes>
           <Route path="/" element={<HomePage />} />

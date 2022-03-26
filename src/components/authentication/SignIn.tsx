@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { showNotification } from '../../utils/notification-utils';
 import { auth, signInWithGooglePopup } from '../../utils/firebase-utils';
 
-import { CustomButton } from '../UI/CustomButton';
+import { BUTTON_STYLE_CLASSES, CustomButton } from '../UI/CustomButton';
 
 const Wrapper = styled.div`
   width: 30vw;
@@ -88,14 +88,18 @@ export const SignIn = () => {
           />
         </StyledFormItem>
         <Row justify="space-between" align="middle">
-          <CustomButton type="default" htmlType="submit">
+          <CustomButton
+            type="default"
+            htmlType="submit"
+            buttonStyle={BUTTON_STYLE_CLASSES.base}
+          >
             SIGN IN
           </CustomButton>
           <CustomButton
             type="primary"
             htmlType="button"
             onClick={googleSignInHandler}
-            buttonStyle="google"
+            buttonStyle={BUTTON_STYLE_CLASSES.google}
           >
             SIGN IN WITH GOOGLE
           </CustomButton>

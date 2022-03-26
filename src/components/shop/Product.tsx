@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import { Col, Row } from 'antd';
 
+import { useAppDispatch } from '../../hooks/redux-hooks';
 import { addItemToCart } from '../../store/cart-slice';
-
-import { CollectionItemType } from '../../pages/ShopPage';
+import { ProductType } from '../../store/category-slice';
 
 import { CustomButton } from '../UI/CustomButton';
-import { useAppDispatch } from '../../hooks/redux-hooks';
 
 const CollectionItemWrapper = styled(Row)`
   height: 350px;
@@ -50,16 +49,14 @@ const ButtonWrapper = styled(Row)`
   }
 `;
 
-export const CollectionItem: React.FC<{ item: CollectionItemType }> = ({
-  item,
-}) => {
+export const Product: React.FC<{ product: ProductType }> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   const addItemToCartHandler = () => {
-    dispatch(addItemToCart(item));
+    dispatch(addItemToCart(product));
   };
 
-  const { name, price, imageUrl } = item;
+  const { name, price, imageUrl } = product;
 
   return (
     <CollectionItemWrapper>

@@ -23,7 +23,7 @@ const SignOutButton = styled.div`
   margin-left: 50px;
 `;
 
-export const HeaderComponent = () => {
+export const Navigation = () => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
@@ -36,7 +36,6 @@ export const HeaderComponent = () => {
       <Col span={12}>
         <Options justify="end" align="middle">
           <NavLink to="/shop">SHOP</NavLink>
-          <NavLink to="/contact">CONTACT</NavLink>
           {currentUser ? (
             <SignOutButton onClick={() => auth.signOut()}>
               SIGN OUT

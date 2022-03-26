@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { Col, Row } from 'antd';
-import Text from 'antd/lib/typography/Text';
+import { Col, Row, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { SectionType } from './Menu';
@@ -43,12 +42,11 @@ const Content = styled(Row)`
   }
 `;
 
-const Title = styled(Text)`
-  font-size: 22px;
+const Title = styled(Typography.Title)`
   color: #4a4a4a;
 `;
 
-const Subtitle = styled(Text)`
+const Subtitle = styled(Typography.Text)`
   font-size: 18px;
   margin-top: -25px;
 `;
@@ -69,7 +67,7 @@ export const MenuItem: React.FC<{ section: SectionType }> = ({ section }) => {
       <Content align="middle" justify="center">
         <Col span={24}>
           <Row gutter={[20, 0]} justify="center">
-            <Title strong>{title.toUpperCase()}</Title>
+            <Title level={4}>{title.toUpperCase()}</Title>
           </Row>
         </Col>
         <Subtitle>SHOP NOW</Subtitle>

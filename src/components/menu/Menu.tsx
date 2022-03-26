@@ -1,6 +1,7 @@
 import { Row } from 'antd';
 
 import { MENU_DATA } from './menu-data';
+
 import { MenuItem } from './MenuItem';
 
 export interface SectionType {
