@@ -5,9 +5,11 @@ import {
   auth,
   createUserProfileDocument,
   getCategoriesAndDocuments,
+  getCollectionsAndDocuments,
 } from './utils/firebase-utils';
 import { setCurrentUser } from './store/slices/userSlice';
 import { setCategories } from './store/slices/categorySlice';
+import { setCollections } from './store/slices/collectionsSlice';
 import { AppContent } from './components/layout/AppContent/AppContent';
 
 function App() {
@@ -26,13 +28,23 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    const getCategoriesMap = async () => {
+    const getCategoriesFromFirestore = async () => {
       const categoriesMap = await getCategoriesAndDocuments();
 
       dispatch(setCategories(categoriesMap));
     };
 
-    getCategoriesMap();
+    getCategoriesFromFirestore();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const getCategoriesFromFirestore = async () => {
+      const collections = await getCollectionsAndDocuments();
+
+      dispatch(setCollections(collections));
+    };
+
+    getCategoriesFromFirestore();
   }, [dispatch]);
 
   return <AppContent />;

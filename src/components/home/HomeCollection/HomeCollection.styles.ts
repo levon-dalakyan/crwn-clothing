@@ -1,26 +1,23 @@
 import styled from 'styled-components';
 import { Row, Typography } from 'antd';
 
-export const MenuItemWrapper = styled(Row)`
+export const Wrapper = styled(Row)<{ size?: string }>`
   min-width: 30%;
-  height: 240px;
+  height: ${({ size }) => (size ? '380px' : '240px')};
   flex: 1 1 auto;
   margin: 0px 7.5px 15px;
   overflow: hidden;
   cursor: pointer;
-
-  &.large {
-    height: 380px;
-  }
 `;
 
-export const BackgroundImage = styled.div`
+export const BackgroundImage = styled.div<{ imageUrl: string }>`
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 
-  ${MenuItemWrapper}:hover & {
+  ${Wrapper}:hover & {
     transform: scale(1.1);
     transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
   }
@@ -34,7 +31,7 @@ export const Content = styled(Row)`
   opacity: 0.7;
   padding: 0 20px;
 
-  ${MenuItemWrapper}:hover & {
+  ${Wrapper}:hover & {
     opacity: 0.9;
   }
 `;
