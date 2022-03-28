@@ -1,9 +1,5 @@
-import { Menu } from '../components/menu/Menu';
+import { Home } from '../components/home/Home/Home';
 
 export const HomePage = () => {
-  return (
-    <>
-      <Menu />
-    </>
-  );
+  return <Home />;
 };

@@ -1,4 +1,4 @@
-import { CartItemType } from '../store/cart-slice';
+import { CartItemType } from '../store/slices/cartSlice';
 
 export const sortAddItemToCart = (
   cartItems: CartItemType[],
