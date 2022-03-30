@@ -24,7 +24,7 @@ export const SignUp = () => {
         password
       );
 
-      createUserProfileDocument(user, { displayName });
+      await createUserProfileDocument(user, { displayName });
 
       showNotification('success', 'You have successfully registered!');
 

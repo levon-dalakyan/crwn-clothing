@@ -14,18 +14,17 @@ import {
   query,
   getDocs,
   orderBy,
-  where,
 } from 'firebase/firestore';
 import { writeBatch } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyB-1mZ4E-Uzqx4NJBcO0ZrtnYZNLhuoCkA',
-  authDomain: 'crwn-db-87ba1.firebaseapp.com',
-  projectId: 'crwn-db-87ba1',
-  storageBucket: 'crwn-db-87ba1.appspot.com',
-  messagingSenderId: '234167490147',
-  appId: '1:234167490147:web:9ffb0f26d7cdcb65430a56',
-  measurementId: 'G-4Q0X3CC2PJ',
+  apiKey: 'AIzaSyClVtHToolcoDhgCgumKme1GP0CjC9Mgzk',
+  authDomain: 'crwn-clothing-94b9e.firebaseapp.com',
+  projectId: 'crwn-clothing-94b9e',
+  storageBucket: 'crwn-clothing-94b9e.appspot.com',
+  messagingSenderId: '567987085020',
+  appId: '1:567987085020:web:ff415e45cfa22209611e19',
+  measurementId: 'G-FX7GCQ722Q',
 };
 
 initializeApp(firebaseConfig);
@@ -70,7 +69,7 @@ export const getCategoriesAndDocuments = async () => {
 
 export const getCollectionsAndDocuments = async () => {
   const collectionRef = collection(db, 'collections');
-  const q = query(collectionRef, orderBy('id', 'desc'));
+  const q = query(collectionRef, orderBy('id', 'asc'));
 
   const querySnapshot = await getDocs(q);
   const collections = querySnapshot.docs.reduce((acc: any, docSnapshot) => {

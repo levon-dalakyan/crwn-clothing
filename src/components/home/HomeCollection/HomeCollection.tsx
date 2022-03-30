@@ -4,7 +4,7 @@ import { CollectionType } from '../../../store/slices/collectionsSlice';
 import * as S from './HomeCollection.styles';
 
 export const HomeCollection: React.FC<{ collection: CollectionType }> = ({
-  collection: { title, size, linkUrl, imageUrl },
+  collection: { title, large, linkUrl, imageUrl },
 }) => {
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ export const HomeCollection: React.FC<{ collection: CollectionType }> = ({
     <S.Wrapper
       align="middle"
       justify="center"
-      size={size}
+      large={large}
       onClick={() => navigate(`${linkUrl}`)}
     >
       <S.BackgroundImage imageUrl={imageUrl} />

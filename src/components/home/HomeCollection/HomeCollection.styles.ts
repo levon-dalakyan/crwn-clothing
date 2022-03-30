@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Row, Typography } from 'antd';
 
-export const Wrapper = styled(Row)<{ size?: string }>`
+export const Wrapper = styled(Row)<{ large?: boolean }>`
   min-width: 30%;
-  height: ${({ size }) => (size ? '380px' : '240px')};
+  height: ${({ large }) => (large ? '380px' : '280px')};
   flex: 1 1 auto;
   margin: 0px 7.5px 15px;
   overflow: hidden;
