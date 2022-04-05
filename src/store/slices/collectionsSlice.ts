@@ -4,7 +4,7 @@ export interface CollectionType {
   id: number;
   title: string;
   imageUrl: string;
-  large?: boolean;
+  large?: string | undefined;
   linkUrl: string;
 }
 

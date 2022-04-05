@@ -4,11 +4,10 @@ import { useAppDispatch } from './hooks/redux-hooks';
 import {
   auth,
   createUserProfileDocument,
-  getCategoriesAndDocuments,
   getCollectionsAndDocuments,
 } from './utils/firebase-utils';
 import { setCurrentUser } from './store/slices/userSlice';
-import { setCategories } from './store/slices/categorySlice';
+import { fetchCategories } from './store/slices/categoriesSlice';
 import { setCollections } from './store/slices/collectionsSlice';
 import { AppContent } from './components/layout/AppContent/AppContent';
 
@@ -28,13 +27,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    const getCategoriesFromFirestore = async () => {
-      const categoriesMap = await getCategoriesAndDocuments();
-
-      dispatch(setCategories(categoriesMap));
-    };
-
-    getCategoriesFromFirestore();
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   useEffect(() => {

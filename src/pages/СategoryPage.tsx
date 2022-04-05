@@ -4,7 +4,9 @@ import { Title } from '../components/common/Title/Title';
 import { Category } from '../components/shop/Category/Category';
 
 export const CategoryPage = () => {
-  const categories: any = useAppSelector((state) => state.category.categories);
+  const categories: any = useAppSelector(
+    (state) => state.categories.categories
+  );
 
   const { category }: any = useParams();
   const products = categories[category];

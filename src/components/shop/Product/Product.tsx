@@ -1,7 +1,7 @@
 import { Col } from 'antd';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { addItemToCart } from '../../../store/slices/cartSlice';
-import { ProductType } from '../../../store/slices/categorySlice';
+import { ProductType } from '../../../store/slices/categoriesSlice';
 import { BUTTON_STYLE_CLASSES, CustomButton } from '../../common/Button/Button';
 import * as S from './Product.styles';
 

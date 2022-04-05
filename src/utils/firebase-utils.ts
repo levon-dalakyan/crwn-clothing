@@ -16,6 +16,7 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import { writeBatch } from 'firebase/firestore';
+import { CategoriesType } from '../store/slices/categoriesSlice';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyClVtHToolcoDhgCgumKme1GP0CjC9Mgzk',
@@ -58,11 +59,14 @@ export const getCategoriesAndDocuments = async () => {
 
   const querySnapshot = await getDocs(q);
 
-  const categoryMap = querySnapshot.docs.reduce((acc: any, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
+  const categoryMap: CategoriesType = querySnapshot.docs.reduce(
+    (acc: any, docSnapshot) => {
+      const { title, items } = docSnapshot.data();
+      acc[title.toLowerCase()] = items;
+      return acc;
+    },
+    {}
+  );
 
   return categoryMap;
 };

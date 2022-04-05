@@ -1,5 +1,5 @@
 import { Product } from '../../../components/shop/Product/Product';
-import { ProductType } from '../../../store/slices/categorySlice';
+import { ProductType } from '../../../store/slices/categoriesSlice';
 import * as S from './Category.styles';
 
 export const Category: React.FC<{ products: ProductType[] }> = ({
