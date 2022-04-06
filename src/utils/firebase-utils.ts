@@ -17,6 +17,7 @@ import {
 } from 'firebase/firestore';
 import { writeBatch } from 'firebase/firestore';
 import { CategoriesType } from '../store/slices/categoriesSlice';
+import { CollectionType } from '../store/slices/collectionsSlice';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyClVtHToolcoDhgCgumKme1GP0CjC9Mgzk',
@@ -76,11 +77,16 @@ export const getCollectionsAndDocuments = async () => {
   const q = query(collectionRef, orderBy('id', 'asc'));
 
   const querySnapshot = await getDocs(q);
-  const collections = querySnapshot.docs.reduce((acc: any, docSnapshot) => {
-    const data = docSnapshot.data();
-    acc[data.title] = data;
-    return acc;
-  }, {});
+
+  const collections: CollectionType[] = querySnapshot.docs.reduce(
+    (acc: any, docSnapshot) => {
+      const data = docSnapshot.data();
+      acc[data.title] = data;
+      console.log('acc', acc);
+      return acc;
+    },
+    {}
+  );
 
   return collections;
 };
