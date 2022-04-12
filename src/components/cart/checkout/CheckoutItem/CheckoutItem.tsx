@@ -5,7 +5,7 @@ import {
   CartItemType,
   clearItemFromCart,
   removeItemFromCart,
-} from '../../../../store/slices/cartSlice';
+} from '../../../../store/slices/cart/cartSlice';
 import * as S from './CheckoutItem.styles';
 
 export const CheckoutItem: React.FC<{ item: CartItemType }> = ({ item }) => {

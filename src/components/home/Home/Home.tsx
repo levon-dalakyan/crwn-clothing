@@ -1,15 +1,18 @@
 import { Row } from 'antd';
 import { useAppSelector } from '../../../hooks/redux-hooks';
-import { CollectionType } from '../../../store/slices/collectionsSlice';
+import {
+  selectCollections,
+  selectCollectionsError,
+  selectCollectionsStatus,
+} from '../../../store/slices/collections/collectionsSelectors';
+import { CollectionType } from '../../../store/slices/collections/collectionsSlice';
 // import { Spinner } from '../../common/Spinner/Spinner';
 import { HomeCollection } from '../HomeCollection/HomeCollection';
 
 export const Home = () => {
-  const collections: CollectionType[] = useAppSelector(
-    (state) => state.collections.collections
-  );
-  // const status = useAppSelector((state) => state.collections.status);
-  // const error = useAppSelector((state) => state.collections.error);
+  const collections: CollectionType[] = useAppSelector(selectCollections);
+  // const status = useAppSelector(selectCollectionsStatus);
+  // const error = useAppSelector(selectCollectionsError);
 
   // if (status === 'loading') {
   //   return <Spinner />;

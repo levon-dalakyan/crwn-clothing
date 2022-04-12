@@ -1,13 +1,16 @@
 import { useAppSelector } from '../../../hooks/redux-hooks';
+import {
+  selectCategories,
+  selectCategoriesError,
+  selectCategoriesStatus,
+} from '../../../store/slices/categories/categoriesSelectors';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { CategoryPreview } from '../CategoryPreview/CategoryPreview';
 
 export const CategoriesOverview = () => {
-  const categoriesMap: any = useAppSelector(
-    (state) => state.categories.categories
-  );
-  const status = useAppSelector((state) => state.categories.status);
-  const error = useAppSelector((state) => state.categories.error);
+  const categoriesMap: any = useAppSelector(selectCategories);
+  const status = useAppSelector(selectCategoriesStatus);
+  const error = useAppSelector(selectCategoriesError);
 
   if (status === 'loading') {
     return <Spinner />;

@@ -1,14 +1,8 @@
-import { useAppSelector } from '../../../../hooks/redux-hooks';
+import { useTotalPrice } from '../../../../hooks/useTotalPrice';
 import * as S from './TotalPrice.styles';
 
 export const TotalPrice = () => {
-  const totalPrice = useAppSelector((state) =>
-    state.cart.cartItems.reduce(
-      (accumulatedTotalPrice, cartItem) =>
-        accumulatedTotalPrice + cartItem.quantity * cartItem.price,
-      0
-    )
-  );
+  const totalPrice = useTotalPrice();
 
   return <S.Total>TOTAL: ${totalPrice}</S.Total>;
 };

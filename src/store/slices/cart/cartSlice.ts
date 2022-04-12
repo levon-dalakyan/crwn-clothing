@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   removeItemIfQuantityValue,
   sortAddItemToCart,
-} from '../../utils/cart-utils';
+} from '../../../utils/cart-utils';
 
 export interface CartItemType {
   id: number;
@@ -12,7 +12,7 @@ export interface CartItemType {
   quantity: number;
 }
 
-interface CartStateType {
+export interface CartStateType {
   cartItems: CartItemType[];
 }
 

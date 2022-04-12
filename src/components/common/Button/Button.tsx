@@ -10,7 +10,13 @@ interface ButtonProps {
   buttonStyle?: string;
 }
 
-export const BUTTON_STYLE_CLASSES: any = {
+interface BUTTON_STYLE_TYPES {
+  base: string;
+  google: string;
+  inverted: string;
+}
+
+export const BUTTON_STYLE_CLASSES: BUTTON_STYLE_TYPES = {
   base: 'base',
   google: 'google-sign-in',
   inverted: 'inverted',
@@ -23,7 +29,7 @@ const getButton = (buttonStyle = BUTTON_STYLE_CLASSES.base) =>
     [BUTTON_STYLE_CLASSES.inverted]: S.InvertedButton,
   }[buttonStyle]);
 
-export const CustomButton: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
   htmlType,
   type,

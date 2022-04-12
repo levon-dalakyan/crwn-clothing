@@ -14,10 +14,12 @@ import {
   query,
   getDocs,
   orderBy,
+  DocumentData,
+  DocumentSnapshot,
 } from 'firebase/firestore';
 import { writeBatch } from 'firebase/firestore';
-import { CategoriesType } from '../store/slices/categoriesSlice';
-import { CollectionType } from '../store/slices/collectionsSlice';
+import { CategoriesType } from '../store/slices/categories/categoriesSlice';
+import { CollectionType } from '../store/slices/collections/collectionsSlice';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyClVtHToolcoDhgCgumKme1GP0CjC9Mgzk',
@@ -82,7 +84,6 @@ export const getCollectionsAndDocuments = async () => {
     (acc: any, docSnapshot) => {
       const data = docSnapshot.data();
       acc[data.title] = data;
-      console.log('acc', acc);
       return acc;
     },
     {}
@@ -98,7 +99,7 @@ export const createUserProfileDocument = async (
   if (!userAuth) return;
 
   const userRef = doc(db, 'users', userAuth.uid);
-  const userSnap = await getDoc(userRef);
+  const userSnap: DocumentSnapshot<DocumentData> = await getDoc(userRef);
 
   if (!userSnap.exists()) {
     const { displayName, email } = userAuth;
@@ -116,5 +117,5 @@ export const createUserProfileDocument = async (
     }
   }
 
-  return userRef;
+  return userSnap;
 };

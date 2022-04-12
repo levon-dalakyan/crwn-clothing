@@ -1,4 +1,4 @@
-import { CustomButton } from '../../../common/Button/Button';
+import { Button } from '../../../common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import * as S from './CartDropdownButton.styles';
 
@@ -9,7 +9,7 @@ export const CartDropdownButton: React.FC<{
 
   return (
     <S.ButtonWrapper justify="center" align="bottom">
-      <CustomButton
+      <Button
         htmlType="button"
         type="primary"
         onClick={() => {
@@ -18,7 +18,7 @@ export const CartDropdownButton: React.FC<{
         }}
       >
         GO TO CHECKOUT
-      </CustomButton>
+      </Button>
     </S.ButtonWrapper>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '../hooks/redux-hooks';
-import { fetchCollections } from '../store/slices/collectionsSlice';
+import { fetchCollections } from '../store/slices/collections/collectionsSlice';
 import { Home } from '../components/home/Home/Home';
 
 export const HomePage = () => {

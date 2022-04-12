@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ProductType } from '../../../store/slices/categoriesSlice';
+import { ProductType } from '../../../store/slices/categories/categoriesSlice';
 import { Product } from '../Product/Product';
 import { Title } from '../../common/Title/Title';
 import * as S from './CategoryPreview.styles';

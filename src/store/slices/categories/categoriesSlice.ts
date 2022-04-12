@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCategoriesAndDocuments } from '../../utils/firebase-utils';
+import { getCategoriesAndDocuments } from '../../../utils/firebase-utils';
 
 export interface ProductType {
   id: string;
@@ -16,7 +16,7 @@ export interface CategoriesType {
   women: ProductType[];
 }
 
-interface CategoriesStateType {
+export interface CategoriesStateType {
   categories: CategoriesType;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | undefined;

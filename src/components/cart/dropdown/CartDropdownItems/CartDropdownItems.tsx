@@ -1,10 +1,11 @@
 import { Empty } from 'antd';
 import { useAppSelector } from '../../../../hooks/redux-hooks';
+import { selectCartItems } from '../../../../store/slices/cart/cartSelectors';
 import { CartDropdownItem } from '../CartDropdownItem/CartDropdownItem';
 import * as S from './CartDropdownItems.styles';
 
 export const CartDropdownItems = () => {
-  const cartItems = useAppSelector((state) => state.cart.cartItems);
+  const cartItems = useAppSelector(selectCartItems);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getCollectionsAndDocuments } from '../../utils/firebase-utils';
+import { getCollectionsAndDocuments } from '../../../utils/firebase-utils';
 
 export interface CollectionType {
   id: number;
@@ -9,7 +9,7 @@ export interface CollectionType {
   linkUrl: string;
 }
 
-interface CollectionsStateType {
+export interface CollectionsStateType {
   collections: CollectionType[];
   status: string;
   error: string | undefined;

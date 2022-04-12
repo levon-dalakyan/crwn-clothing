@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import { CartItemType } from '../../../../store/slices/cartSlice';
+import { CartItemType } from '../../../../store/slices/cart/cartSlice';
 import * as S from './CartDropdownItem.styles';
 
 export const CartDropdownItem: React.FC<{ item: CartItemType }> = ({

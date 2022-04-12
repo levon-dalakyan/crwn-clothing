@@ -1,12 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux-hooks';
+import { selectCurrentUser } from '../../../store/slices/user/userSelectors';
 import { HomePage } from '../../../pages/HomePage';
 import { ShopPage } from '../../../pages/ShopPage';
 import { AuthPage } from '../../../pages/AuthPage';
 import { CheckoutPage } from '../../../pages/CheckoutPage';
 
 export const AppRoutes = () => {
-  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const currentUser = useAppSelector(selectCurrentUser);
 
   return (
     <Routes>

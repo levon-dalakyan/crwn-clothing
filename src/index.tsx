@@ -1,11 +1,13 @@
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistStore } from 'redux-persist';
 import GlobalStyle from './styles/GlobalStyle';
 import App from './App';
 import { store } from './store/store';
+import { stripePromise } from './utils/stripe-utils';
 
 let persistor = persistStore(store);
 
@@ -16,7 +18,9 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <App />
+          <Elements stripe={stripePromise}>
+            <App />
+          </Elements>
         </BrowserRouter>
       </PersistGate>
     </Provider>

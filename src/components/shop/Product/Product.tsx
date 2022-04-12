@@ -1,8 +1,8 @@
 import { Col } from 'antd';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
-import { addItemToCart } from '../../../store/slices/cartSlice';
-import { ProductType } from '../../../store/slices/categoriesSlice';
-import { BUTTON_STYLE_CLASSES, CustomButton } from '../../common/Button/Button';
+import { addItemToCart } from '../../../store/slices/cart/cartSlice';
+import { ProductType } from '../../../store/slices/categories/categoriesSlice';
+import { BUTTON_STYLE_CLASSES, Button } from '../../common/Button/Button';
 import * as S from './Product.styles';
 
 export const Product: React.FC<{ product: ProductType }> = ({ product }) => {
@@ -25,14 +25,14 @@ export const Product: React.FC<{ product: ProductType }> = ({ product }) => {
         <Col>${price}</Col>
       </S.Footer>
       <S.ButtonWrapper justify="center">
-        <CustomButton
+        <Button
           htmlType="button"
           type="primary"
           onClick={addItemToCartHandler}
           buttonStyle={BUTTON_STYLE_CLASSES.inverted}
         >
           ADD TO CART
-        </CustomButton>
+        </Button>
       </S.ButtonWrapper>
     </S.CollectionItemWrapper>
   );

@@ -2,7 +2,7 @@ import { Form, Input } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, createUserProfileDocument } from '../../../utils/firebase-utils';
 import { showNotification } from '../../../utils/notification-utils';
-import { CustomButton } from '../../common/Button/Button';
+import { Button } from '../../common/Button/Button';
 import { Title } from '../../common/Title/Title';
 import * as S from './SignUp.styles';
 
@@ -68,9 +68,9 @@ export const SignUp = () => {
         >
           <Input.Password className="input" placeholder="Confirm Password" />
         </S.StyledFormItem>
-        <CustomButton type="default" htmlType="submit">
+        <Button type="default" htmlType="submit">
           SIGN UP
-        </CustomButton>
+        </Button>
       </Form>
     </S.Wrapper>
   );

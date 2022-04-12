@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useAppDispatch } from './hooks/redux-hooks';
 import { auth, createUserProfileDocument } from './utils/firebase-utils';
-import { setCurrentUser } from './store/slices/userSlice';
-import { fetchCategories } from './store/slices/categoriesSlice';
+import { setCurrentUser } from './store/slices/user/userSlice';
 import { AppContent } from './components/layout/AppContent/AppContent';
 
 function App() {
@@ -19,10 +18,6 @@ function App() {
     });
 
     return unsubscribe;
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchCategories());
   }, [dispatch]);
 
   return <AppContent />;
