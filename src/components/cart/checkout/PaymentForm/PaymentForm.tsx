@@ -1,27 +1,33 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useAppSelector } from '../../../../hooks/redux-hooks';
+import { selectCurrentUser } from '../../../../store/slices/user/userSelectors';
+import { selectCartTotalPrice } from '../../../../store/slices/cart/cartSelectors';
 import { showNotification } from '../../../../utils/notification-utils';
 import { Button, BUTTON_STYLE_CLASSES } from '../../../common/Button/Button';
 import { Title } from '../../../common/Title/Title';
 import * as S from './PaymentForm.styles';
-import { useTotalPrice } from '../../../../hooks/useTotalPrice';
 
 export const PaymentForm = () => {
+  const [processingPayment, setProcessingPayment] = useState(false);
+  const totalPrice = useAppSelector(selectCartTotalPrice);
+  const currentUser = useAppSelector(selectCurrentUser);
   const stripe = useStripe();
   const elements = useElements();
-  const totalPrice = useTotalPrice();
 
   const paymentHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!stripe || !elements) return;
 
+    setProcessingPayment(true);
+
     const response = await fetch('/.netlify/functions/create-payment-intent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ amount: totalPrice + '00' }),
+      body: JSON.stringify({ amount: totalPrice * 100 }),
     }).then((res) => res.json());
 
     const {
@@ -34,10 +40,13 @@ export const PaymentForm = () => {
         payment_method: {
           card: cardElement,
           billing_details: {
-            name: 'Levon Dalakyan',
+            name: currentUser?.displayName ? currentUser?.displayName : 'Guest',
           },
         },
       });
+
+      setProcessingPayment(false);
+      cardElement.clear();
 
       if (paymentResult.error) {
         showNotification('error', paymentResult.error.message);
@@ -59,7 +68,7 @@ export const PaymentForm = () => {
           htmlType="submit"
           buttonStyle={BUTTON_STYLE_CLASSES.inverted}
         >
-          Pay Now
+          {processingPayment ? <S.Spinner /> : 'Pay Now'}
         </Button>
       </S.Form>
     </S.Wrapper>

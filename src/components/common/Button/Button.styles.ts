@@ -8,7 +8,7 @@ export const BaseButton = styled(Button)`
   background-color: #000;
   color: #fff;
   text-transform: uppercase;
-  padding: 0 35px;
+  padding: 9px 35px;
 
   &:hover {
     border: 1px solid #000;

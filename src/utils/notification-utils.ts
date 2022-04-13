@@ -5,6 +5,10 @@ notification.config({
   placement: 'topLeft',
 });
 
+const style = {
+  width: 'auto',
+};
+
 export const showNotification = (
   type: string,
   text?: string,
@@ -13,17 +17,17 @@ export const showNotification = (
   if (type === 'error') {
     notification.error({
       message: text,
-      style: { width: 'auto' },
+      style: style,
     });
   } else if (type === 'success') {
     notification.success({
       message: displayName ? `Welcome ${displayName}!` : text,
-      style: { width: 'auto' },
+      style: style,
     });
   } else if (type === 'warning') {
     notification.warning({
       message: text,
-      style: { width: 'auto' },
+      style: style,
     });
   }
 };

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
+import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { useAppDispatch } from './hooks/redux-hooks';
 import { auth, createUserProfileDocument } from './utils/firebase-utils';
 import { setCurrentUser } from './store/slices/user/userSlice';
@@ -9,9 +10,11 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+    let userSnap: DocumentSnapshot<DocumentData> | undefined;
+    const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
-        createUserProfileDocument(userAuth);
+        userSnap = await createUserProfileDocument(userAuth);
+        dispatch(setCurrentUser({ id: userSnap!.id, ...userSnap!.data() }));
       }
 
       dispatch(setCurrentUser(userAuth));

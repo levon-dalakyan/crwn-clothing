@@ -7,6 +7,7 @@ import { auth, signInWithGooglePopup } from '../../../utils/firebase-utils';
 import { BUTTON_STYLE_CLASSES, Button } from '../../common/Button/Button';
 import * as S from './SignIn.styles';
 import { Title } from '../../common/Title/Title';
+import { setCurrentUser } from '../../../store/slices/user/userSlice';
 
 export const SignIn = () => {
   const [form] = Form.useForm();

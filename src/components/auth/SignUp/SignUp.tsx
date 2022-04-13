@@ -17,6 +17,10 @@ export const SignUp = () => {
       return;
     }
 
+    if (password.length < 6 && confirmPassword.length < 6) {
+      showNotification('warning', 'The password is too short');
+    }
+
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
