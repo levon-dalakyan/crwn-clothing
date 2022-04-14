@@ -1,8 +1,8 @@
 import { Selector, createSelector } from 'reselect';
 import { RootState } from './../../store';
-import { CategoriesStateType } from './categoriesSlice';
+import { ICategoriesState } from './categoriesSlice';
 
-const selectCategoriesReducer: Selector<RootState, CategoriesStateType> = (
+const selectCategoriesReducer: Selector<RootState, ICategoriesState> = (
   state
 ) => state.categories;
 

@@ -1,8 +1,8 @@
 import { Selector, createSelector } from 'reselect';
 import { RootState } from './../../store';
-import { CollectionsStateType } from './collectionsSlice';
+import { ICollectionsState } from './collectionsSlice';
 
-const selectCollectionsReducer: Selector<RootState, CollectionsStateType> = (
+const selectCollectionsReducer: Selector<RootState, ICollectionsState> = (
   state
 ) => state.collections;
 

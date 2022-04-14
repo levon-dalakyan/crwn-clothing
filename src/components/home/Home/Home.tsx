@@ -5,22 +5,22 @@ import {
   selectCollectionsError,
   selectCollectionsStatus,
 } from '../../../store/slices/collections/collectionsSelectors';
-import { CollectionType } from '../../../store/slices/collections/collectionsSlice';
-// import { Spinner } from '../../common/Spinner/Spinner';
+import { ICollection } from '../../../store/slices/collections/collectionsSlice';
+import { Spinner } from '../../common/Spinner/Spinner';
 import { HomeCollection } from '../HomeCollection/HomeCollection';
 
 export const Home = () => {
-  const collections: CollectionType[] = useAppSelector(selectCollections);
-  // const status = useAppSelector(selectCollectionsStatus);
-  // const error = useAppSelector(selectCollectionsError);
+  const collections: ICollection[] = useAppSelector(selectCollections);
+  const status = useAppSelector(selectCollectionsStatus);
+  const error = useAppSelector(selectCollectionsError);
 
-  // if (status === 'loading') {
-  //   return <Spinner />;
-  // }
+  if (status === 'loading') {
+    return <Spinner />;
+  }
 
-  // if (status === 'failed') {
-  //   return <p>{error}</p>;
-  // }
+  if (status === 'failed') {
+    return <p>{error}</p>;
+  }
 
   return (
     <Row>

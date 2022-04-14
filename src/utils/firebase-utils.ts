@@ -18,8 +18,8 @@ import {
   DocumentSnapshot,
 } from 'firebase/firestore';
 import { writeBatch } from 'firebase/firestore';
-import { CategoriesType } from '../store/slices/categories/categoriesSlice';
-import { CollectionType } from '../store/slices/collections/collectionsSlice';
+import { ICategories } from '../store/slices/categories/categoriesSlice';
+import { ICollection } from '../store/slices/collections/collectionsSlice';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyClVtHToolcoDhgCgumKme1GP0CjC9Mgzk',
@@ -62,7 +62,7 @@ export const getCategoriesAndDocuments = async () => {
 
   const querySnapshot = await getDocs(q);
 
-  const categoryMap: CategoriesType = querySnapshot.docs.reduce(
+  const categoryMap: ICategories = querySnapshot.docs.reduce(
     (acc: any, docSnapshot) => {
       const { title, items } = docSnapshot.data();
       acc[title.toLowerCase()] = items;
@@ -80,7 +80,7 @@ export const getCollectionsAndDocuments = async () => {
 
   const querySnapshot = await getDocs(q);
 
-  const collections: CollectionType[] = querySnapshot.docs.reduce(
+  const collections: ICollection[] = querySnapshot.docs.reduce(
     (acc: any, docSnapshot) => {
       const data = docSnapshot.data();
       acc[data.title] = data;

@@ -4,7 +4,7 @@ import {
   sortAddItemToCart,
 } from '../../../utils/cart-utils';
 
-export interface CartItemType {
+export interface ICartItem {
   id: number;
   name: string;
   price: number;
@@ -12,11 +12,11 @@ export interface CartItemType {
   quantity: number;
 }
 
-export interface CartStateType {
-  cartItems: CartItemType[];
+export interface ICartState {
+  cartItems: ICartItem[];
 }
 
-const initialState: CartStateType = {
+const initialState: ICartState = {
   cartItems: [],
 };
 

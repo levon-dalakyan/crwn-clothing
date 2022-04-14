@@ -2,13 +2,13 @@ import { Col, Divider } from 'antd';
 import { useAppDispatch } from '../../../../hooks/redux-hooks';
 import {
   addItemToCart,
-  CartItemType,
+  ICartItem,
   clearItemFromCart,
   removeItemFromCart,
 } from '../../../../store/slices/cart/cartSlice';
 import * as S from './CheckoutItem.styles';
 
-export const CheckoutItem: React.FC<{ item: CartItemType }> = ({ item }) => {
+export const CheckoutItem: React.FC<{ item: ICartItem }> = ({ item }) => {
   const dispatch = useAppDispatch();
 
   const { imageUrl, name, quantity, price } = item;

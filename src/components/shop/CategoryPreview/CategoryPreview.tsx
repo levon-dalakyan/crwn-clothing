@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ProductType } from '../../../store/slices/categories/categoriesSlice';
+import { IProduct } from '../../../store/slices/categories/categoriesSlice';
 import { Product } from '../Product/Product';
 import { Title } from '../../common/Title/Title';
 import * as S from './CategoryPreview.styles';
 
 export const CategoryPreview: React.FC<{
-  products: ProductType[];
+  products: IProduct[];
   title: string;
 }> = ({ products, title }) => {
   return (

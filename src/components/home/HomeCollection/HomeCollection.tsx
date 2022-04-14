@@ -1,9 +1,9 @@
 import { Col, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { CollectionType } from '../../../store/slices/collections/collectionsSlice';
+import { ICollection } from '../../../store/slices/collections/collectionsSlice';
 import * as S from './HomeCollection.styles';
 
-export const HomeCollection: React.FC<{ collection: CollectionType }> = ({
+export const HomeCollection: React.FC<{ collection: ICollection }> = ({
   collection: { title, large, linkUrl, imageUrl },
 }) => {
   const navigate = useNavigate();

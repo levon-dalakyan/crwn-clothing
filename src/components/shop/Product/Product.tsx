@@ -1,11 +1,11 @@
 import { Col } from 'antd';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { addItemToCart } from '../../../store/slices/cart/cartSlice';
-import { ProductType } from '../../../store/slices/categories/categoriesSlice';
+import { IProduct } from '../../../store/slices/categories/categoriesSlice';
 import { BUTTON_STYLE_CLASSES, Button } from '../../common/Button/Button';
 import * as S from './Product.styles';
 
-export const Product: React.FC<{ product: ProductType }> = ({ product }) => {
+export const Product: React.FC<{ product: IProduct }> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   const addItemToCartHandler = () => {

@@ -1,8 +1,8 @@
-import { CartItemType } from '../store/slices/cart/cartSlice';
+import { ICartItem } from '../store/slices/cart/cartSlice';
 
 export const sortAddItemToCart = (
-  cartItems: CartItemType[],
-  cartItemToAdd: CartItemType
+  cartItems: ICartItem[],
+  cartItemToAdd: ICartItem
 ) => {
   const cartItemExists = cartItems.find(
     (cartItem) => cartItem.id === cartItemToAdd.id
@@ -20,8 +20,8 @@ export const sortAddItemToCart = (
 };
 
 export const removeItemIfQuantityValue = (
-  cartItems: CartItemType[],
-  cartItemToRemove: CartItemType
+  cartItems: ICartItem[],
+  cartItemToRemove: ICartItem
 ) => {
   const existedCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToRemove.id
