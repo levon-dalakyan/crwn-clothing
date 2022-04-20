@@ -1,19 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { CategoryItem } from '../categories/categoriesSlice';
 import {
   removeItemIfQuantityValue,
   sortAddItemToCart,
 } from '../../../utils/cart-utils';
 
-export interface ICartItem {
-  id: number;
-  name: string;
-  price: number;
-  imageUrl: string;
+export type CartItem = CategoryItem & {
   quantity: number;
-}
+};
 
 export interface ICartState {
-  cartItems: ICartItem[];
+  cartItems: CartItem[];
 }
 
 const initialState: ICartState = {

@@ -9,14 +9,18 @@ export interface ICollection {
   linkUrl: string;
 }
 
+export interface ICollectionsMap {
+  [key: string]: ICollection;
+}
+
 export interface ICollectionsState {
-  collections: ICollection[];
+  collections: ICollectionsMap;
   status: string;
   error: string | undefined;
 }
 
 const initialState: ICollectionsState = {
-  collections: [],
+  collections: {},
   status: 'idle',
   error: '',
 };

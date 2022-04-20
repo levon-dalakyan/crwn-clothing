@@ -1,17 +1,34 @@
 import { Form, Input } from 'antd';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  AuthError,
+  AuthErrorCodes,
+} from 'firebase/auth';
+import { useAppDispatch } from '../../../hooks/redux-hooks';
+import { setCurrentUser } from '../../../store/slices/user/userSlice';
 import { auth, createUserProfileDocument } from '../../../utils/firebase-utils';
 import { showNotification } from '../../../utils/notification-utils';
 import { Button } from '../../common/Button/Button';
 import { Title } from '../../common/Title/Title';
 import * as S from './SignUp.styles';
 
+interface IFormValues {
+  displayName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export const SignUp = () => {
+  const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 
-  const formSubmitHandler = async (values: any) => {
-    const { displayName, email, password, confirmPassword } = values;
-
+  const formSubmitHandler = async ({
+    displayName,
+    email,
+    password,
+    confirmPassword,
+  }: IFormValues) => {
     if (password !== confirmPassword) {
       showNotification('warning', "Passwords don't match");
       return;
@@ -28,13 +45,15 @@ export const SignUp = () => {
         password
       );
 
-      await createUserProfileDocument(user, { displayName });
+      const userSnap = await createUserProfileDocument(user, { displayName });
 
-      showNotification('success', 'You have successfully registered!');
+      dispatch(setCurrentUser({ id: userSnap.id, ...userSnap.data() }));
+
+      showNotification('success', '', userSnap.data().displayName);
 
       form.resetFields();
-    } catch ({ code }) {
-      if (code === 'auth/email-already-in-use') {
+    } catch (error) {
+      if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
         showNotification('error', 'This email is already in use');
       }
     }

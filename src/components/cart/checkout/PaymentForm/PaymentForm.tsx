@@ -35,25 +35,26 @@ export const PaymentForm = () => {
     } = response;
 
     const cardElement = elements.getElement(CardElement);
-    if (cardElement) {
-      const paymentResult = await stripe.confirmCardPayment(client_secret, {
-        payment_method: {
-          card: cardElement,
-          billing_details: {
-            name: currentUser?.displayName ? currentUser?.displayName : 'Guest',
-          },
+
+    if (cardElement === null) return;
+
+    const paymentResult = await stripe.confirmCardPayment(client_secret, {
+      payment_method: {
+        card: cardElement,
+        billing_details: {
+          name: currentUser?.displayName ? currentUser.displayName : 'Guest',
         },
-      });
+      },
+    });
 
-      setProcessingPayment(false);
-      cardElement.clear();
+    setProcessingPayment(false);
+    cardElement.clear();
 
-      if (paymentResult.error) {
-        showNotification('error', paymentResult.error.message);
-      } else {
-        if (paymentResult.paymentIntent.status === 'succeeded') {
-          showNotification('success', 'Payment Successful');
-        }
+    if (paymentResult.error) {
+      showNotification('error', paymentResult.error.message);
+    } else {
+      if (paymentResult.paymentIntent.status === 'succeeded') {
+        showNotification('success', 'Payment Successful');
       }
     }
   };

@@ -1,3 +1,4 @@
+import { ICategory } from './../store/slices/categories/categoriesSlice';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -14,12 +15,14 @@ import {
   query,
   getDocs,
   orderBy,
-  DocumentData,
-  DocumentSnapshot,
+  QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { writeBatch } from 'firebase/firestore';
-import { ICategories } from '../store/slices/categories/categoriesSlice';
-import { ICollection } from '../store/slices/collections/collectionsSlice';
+import { ICategoriesMap } from '../store/slices/categories/categoriesSlice';
+import {
+  ICollection,
+  ICollectionsMap,
+} from '../store/slices/collections/collectionsSlice';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyClVtHToolcoDhgCgumKme1GP0CjC9Mgzk',
@@ -41,14 +44,18 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
-export const addCollectionAndDocuments = async (
+interface IObjectToAdd {
+  title: string;
+}
+
+export const addCollectionAndDocuments = async <T extends IObjectToAdd>(
   collectionKey: string,
-  objectsToAdd: any
-) => {
+  objectsToAdd: T[]
+): Promise<void> => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
-  objectsToAdd.forEach((obj: any) => {
+  objectsToAdd.forEach((obj) => {
     const docRef = doc(collectionRef, obj.title.toLowerCase());
     batch.set(docRef, obj);
   });
@@ -56,50 +63,53 @@ export const addCollectionAndDocuments = async (
   await batch.commit();
 };
 
-export const getCategoriesAndDocuments = async () => {
+export const getCategoriesAndDocuments = async (): Promise<ICategoriesMap> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
 
-  const categoryMap: ICategories = querySnapshot.docs.reduce(
-    (acc: any, docSnapshot) => {
-      const { title, items } = docSnapshot.data();
-      acc[title.toLowerCase()] = items;
-      return acc;
-    },
-    {}
-  );
+  const categoriesMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data() as ICategory;
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {} as ICategoriesMap);
 
-  return categoryMap;
+  return categoriesMap;
 };
 
-export const getCollectionsAndDocuments = async () => {
-  const collectionRef = collection(db, 'collections');
-  const q = query(collectionRef, orderBy('id', 'asc'));
+export const getCollectionsAndDocuments =
+  async (): Promise<ICollectionsMap> => {
+    const collectionRef = collection(db, 'collections');
+    const q = query(collectionRef, orderBy('id', 'asc'));
 
-  const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(q);
 
-  const collections: ICollection[] = querySnapshot.docs.reduce(
-    (acc: any, docSnapshot) => {
-      const data = docSnapshot.data();
+    const collections = querySnapshot.docs.reduce((acc, docSnapshot) => {
+      const data = docSnapshot.data() as ICollection;
       acc[data.title] = data;
       return acc;
-    },
-    {}
-  );
+    }, {} as ICollectionsMap);
 
-  return collections;
-};
+    return collections;
+  };
+
+interface AdditionalInformation {
+  displayName?: string;
+}
+
+export interface UserData {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+}
 
 export const createUserProfileDocument = async (
-  userAuth: User | null,
-  additionalData?: any
-) => {
-  if (!userAuth) return;
-
+  userAuth: User,
+  additionalInformation = {} as AdditionalInformation
+): Promise<QueryDocumentSnapshot<UserData>> => {
   const userRef = doc(db, 'users', userAuth.uid);
-  const userSnap: DocumentSnapshot<DocumentData> = await getDoc(userRef);
+  const userSnap = await getDoc(userRef);
 
   if (!userSnap.exists()) {
     const { displayName, email } = userAuth;
@@ -110,12 +120,12 @@ export const createUserProfileDocument = async (
         createdAt,
         displayName,
         email,
-        ...additionalData,
+        ...additionalInformation,
       });
-    } catch (error: any) {
-      console.log('error creating user', error.message);
+    } catch (error) {
+      console.log('error creating user', error);
     }
   }
 
-  return userSnap;
+  return userSnap as QueryDocumentSnapshot<UserData>;
 };

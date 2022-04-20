@@ -1,5 +1,6 @@
+import { FC } from 'react';
 import { Typography } from 'antd';
 
-export const Title: React.FC = ({ children }) => {
+export const Title: FC = ({ children }) => {
   return <Typography.Title level={2}>{children}</Typography.Title>;
 };

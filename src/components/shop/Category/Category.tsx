@@ -1,12 +1,17 @@
-import { Product } from '../../../components/shop/Product/Product';
-import { IProduct } from '../../../store/slices/categories/categoriesSlice';
+import { FC } from 'react';
+import { CategoryItem } from '../CategoryItem/CategoryItem';
+import { CategoryItem as CategoryItemType } from '../../../store/slices/categories/categoriesSlice';
 import * as S from './Category.styles';
 
-export const Category: React.FC<{ products: IProduct[] }> = ({ products }) => {
+interface CategoryProps {
+  products: CategoryItemType[];
+}
+
+export const Category: FC<CategoryProps> = ({ products }) => {
   return (
     <S.Items gutter={[0, 60]}>
-      {products.map((product: any) => (
-        <Product key={product.id} product={product} />
+      {products.map((product) => (
+        <CategoryItem key={product.id} product={product} />
       ))}
     </S.Items>
   );

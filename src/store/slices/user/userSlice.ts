@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserInfo } from 'firebase/auth';
+import { UserData } from './../../../utils/firebase-utils';
 
 export interface IUserState {
-  currentUser: UserInfo | null;
+  currentUser: UserData | null;
 }
 
 const initialState: IUserState = {

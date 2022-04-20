@@ -5,12 +5,12 @@ import {
   selectCollectionsError,
   selectCollectionsStatus,
 } from '../../../store/slices/collections/collectionsSelectors';
-import { ICollection } from '../../../store/slices/collections/collectionsSlice';
+import { ICollectionsMap } from '../../../store/slices/collections/collectionsSlice';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { HomeCollection } from '../HomeCollection/HomeCollection';
 
 export const Home = () => {
-  const collections: ICollection[] = useAppSelector(selectCollections);
+  const collections: ICollectionsMap = useAppSelector(selectCollections);
   const status = useAppSelector(selectCollectionsStatus);
   const error = useAppSelector(selectCollectionsError);
 
@@ -24,10 +24,9 @@ export const Home = () => {
 
   return (
     <Row>
-      {Object.keys(collections).map((key: any) => {
-        const collection = collections[key];
-        return <HomeCollection key={key} collection={collection} />;
-      })}
+      {Object.keys(collections).map((key: any) => (
+        <HomeCollection key={key} collection={collections[key]} />
+      ))}
     </Row>
   );
 };

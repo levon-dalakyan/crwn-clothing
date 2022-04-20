@@ -9,7 +9,7 @@ export const CheckoutItems = () => {
   return (
     <Row justify="center">
       {cartItems.length ? (
-        cartItems.map((item) => <CheckoutItem item={item} />)
+        cartItems.map((item) => <CheckoutItem key={item.id} item={item} />)
       ) : (
         <Empty description={'No products in cart yet'} />
       )}

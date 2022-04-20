@@ -1,14 +1,19 @@
+import { FC } from 'react';
 import { Col, Divider } from 'antd';
 import { useAppDispatch } from '../../../../hooks/redux-hooks';
 import {
   addItemToCart,
-  ICartItem,
+  CartItem,
   clearItemFromCart,
   removeItemFromCart,
 } from '../../../../store/slices/cart/cartSlice';
 import * as S from './CheckoutItem.styles';
 
-export const CheckoutItem: React.FC<{ item: ICartItem }> = ({ item }) => {
+interface CheckoutItemProps {
+  item: CartItem;
+}
+
+export const CheckoutItem: FC<CheckoutItemProps> = ({ item }) => {
   const dispatch = useAppDispatch();
 
   const { imageUrl, name, quantity, price } = item;

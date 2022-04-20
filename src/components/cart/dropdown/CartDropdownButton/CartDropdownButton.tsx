@@ -1,10 +1,15 @@
+import { FC } from 'react';
 import { Button } from '../../../common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import * as S from './CartDropdownButton.styles';
 
-export const CartDropdownButton: React.FC<{
+interface CartDropdownButtonProps {
   setVisibility: () => void;
-}> = ({ setVisibility }) => {
+}
+
+export const CartDropdownButton: FC<CartDropdownButtonProps> = ({
+  setVisibility,
+}) => {
   const navigate = useNavigate();
 
   return (

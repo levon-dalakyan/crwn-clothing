@@ -1,10 +1,15 @@
+import { FC } from 'react';
 import { CartDropdownButton } from '../CartDropdownButton/CartDropdownButton';
 import { CartDropdownItems } from '../CartDropdownItems/CartDropdownItems';
 import * as S from './CartDropdownContent.styles';
 
-export const CartDropdownContent: React.FC<{
+interface CartDropdownContentProps {
   setVisibility: () => void;
-}> = ({ setVisibility }) => {
+}
+
+export const CartDropdownContent: FC<CartDropdownContentProps> = ({
+  setVisibility,
+}) => {
   return (
     <S.Wrapper>
       <CartDropdownItems />

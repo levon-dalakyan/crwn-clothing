@@ -1,15 +1,28 @@
 import { Row, Form, Input } from 'antd';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-
+import {
+  AuthError,
+  AuthErrorCodes,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { showNotification } from '../../../utils/notification-utils';
-import { auth, signInWithGooglePopup } from '../../../utils/firebase-utils';
-
-import { BUTTON_STYLE_CLASSES, Button } from '../../common/Button/Button';
-import * as S from './SignIn.styles';
-import { Title } from '../../common/Title/Title';
+import { useAppDispatch } from '../../../hooks/redux-hooks';
+import {
+  auth,
+  createUserProfileDocument,
+  signInWithGooglePopup,
+} from '../../../utils/firebase-utils';
 import { setCurrentUser } from '../../../store/slices/user/userSlice';
+import { BUTTON_STYLE_CLASSES, Button } from '../../common/Button/Button';
+import { Title } from '../../common/Title/Title';
+import * as S from './SignIn.styles';
+
+interface IFormValues {
+  email: string;
+  password: string;
+}
 
 export const SignIn = () => {
+  const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 
   const googleSignInHandler = async () => {
@@ -20,26 +33,26 @@ export const SignIn = () => {
     }
   };
 
-  const formSubmitHandler = async (values: any) => {
-    const { email, password } = values;
-
+  const formSubmitHandler = async ({ email, password }: IFormValues) => {
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
 
-      if (response) {
-        showNotification('success', '', 'here');
-      }
+      const userSnap = await createUserProfileDocument(user);
+
+      dispatch(setCurrentUser({ id: userSnap.id, ...userSnap.data() }));
+
+      showNotification('success', '', userSnap.data().displayName);
 
       form.resetFields();
-    } catch ({ code }) {
-      switch (code) {
-        case 'auth/wrong-password':
+    } catch (error) {
+      switch ((error as AuthError).code) {
+        case AuthErrorCodes.INVALID_PASSWORD:
           showNotification('error', 'Wrong email or password');
           break;
-        case 'auth/user-not-found':
+        case AuthErrorCodes.USER_DELETED:
           showNotification('error', 'This email is not registered');
           break;
-        case 'auth/too-many-requests':
+        case AuthErrorCodes.TOO_MANY_ATTEMPTS_TRY_LATER:
           showNotification('error', 'Too many requests, try again later');
           break;
       }

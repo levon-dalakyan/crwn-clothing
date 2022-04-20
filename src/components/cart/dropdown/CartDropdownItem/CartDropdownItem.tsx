@@ -1,8 +1,13 @@
+import { FC } from 'react';
 import { Col, Row } from 'antd';
-import { ICartItem } from '../../../../store/slices/cart/cartSlice';
+import { CartItem } from '../../../../store/slices/cart/cartSlice';
 import * as S from './CartDropdownItem.styles';
 
-export const CartDropdownItem: React.FC<{ item: ICartItem }> = ({
+interface CartDropdownItemProps {
+  item: CartItem;
+}
+
+export const CartDropdownItem: FC<CartDropdownItemProps> = ({
   item: { imageUrl, name, price, quantity },
 }) => {
   return (

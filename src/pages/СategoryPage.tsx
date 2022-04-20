@@ -5,10 +5,17 @@ import { Category } from '../components/shop/Category/Category';
 import { selectCategories } from '../store/slices/categories/categoriesSelectors';
 
 export const CategoryPage = () => {
-  const categories: any = useAppSelector(selectCategories);
+  const categoriesMap = useAppSelector(selectCategories);
 
-  const { category }: any = useParams();
-  const products = categories[category];
+  interface CategoryRouteParams {
+    category: string;
+  }
+
+  const { category } = useParams<
+    keyof CategoryRouteParams
+  >() as CategoryRouteParams;
+
+  const products = categoriesMap[category];
 
   return (
     <>

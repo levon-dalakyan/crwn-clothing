@@ -1,35 +1,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getCategoriesAndDocuments } from '../../../utils/firebase-utils';
 
-export interface IProduct {
-  id: string;
+export interface ICategory {
+  title: string;
+  items: CategoryItem[];
+}
+
+export type CategoryItem = {
+  id: number;
   imageUrl: string;
   name: string;
   price: number;
-}
+};
 
-export interface ICategories {
-  hats: IProduct[];
-  jackets: IProduct[];
-  man: IProduct[];
-  sneakers: IProduct[];
-  women: IProduct[];
+export interface ICategoriesMap {
+  [key: string]: CategoryItem[];
 }
 
 export interface ICategoriesState {
-  categories: ICategories;
+  categories: ICategoriesMap;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | undefined;
 }
 
 const initialState: ICategoriesState = {
-  categories: {
-    hats: [],
-    jackets: [],
-    man: [],
-    sneakers: [],
-    women: [],
-  },
+  categories: {},
   status: 'idle',
   error: '',
 };

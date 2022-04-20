@@ -1,13 +1,19 @@
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { IProduct } from '../../../store/slices/categories/categoriesSlice';
-import { Product } from '../Product/Product';
+import { CategoryItem as CategoryItemType } from '../../../store/slices/categories/categoriesSlice';
+import { CategoryItem } from '../CategoryItem/CategoryItem';
 import { Title } from '../../common/Title/Title';
 import * as S from './CategoryPreview.styles';
 
-export const CategoryPreview: React.FC<{
-  products: IProduct[];
+interface CategoryPreviewProps {
+  products: CategoryItemType[];
   title: string;
-}> = ({ products, title }) => {
+}
+
+export const CategoryPreview: FC<CategoryPreviewProps> = ({
+  products,
+  title,
+}) => {
   return (
     <S.Wrapper>
       <Title>
@@ -17,7 +23,9 @@ export const CategoryPreview: React.FC<{
         {products &&
           products
             .filter((_, idx) => idx < 4)
-            .map((product) => <Product key={product.id} product={product} />)}
+            .map((product) => (
+              <CategoryItem key={product.id} product={product} />
+            ))}
       </S.Items>
     </S.Wrapper>
   );
