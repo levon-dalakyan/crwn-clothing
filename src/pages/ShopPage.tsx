@@ -3,7 +3,7 @@ import { useAppDispatch } from '../hooks/redux-hooks';
 import { fetchCategories } from '../store/slices/categories/categoriesSlice';
 import { Shop } from '../components/shop/Shop/Shop';
 
-export const ShopPage = () => {
+const ShopPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -12,3 +12,5 @@ export const ShopPage = () => {
 
   return <Shop />;
 };
+
+export default ShopPage;

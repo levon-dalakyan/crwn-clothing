@@ -10,11 +10,4 @@ export default createGlobalStyle`
 	body { 
 		padding: 20px 60px;
 	}
-
-	.input {
-		border: none;
-  	border-bottom: 1px solid #000;
-		border-radius: 0;
-  	padding: 10px;
-	}
 `;

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Col, Divider } from 'antd';
 import { useAppDispatch } from '../../../../hooks/redux-hooks';
 import {
@@ -13,7 +13,7 @@ interface CheckoutItemProps {
   item: CartItem;
 }
 
-export const CheckoutItem: FC<CheckoutItemProps> = ({ item }) => {
+export const CheckoutItem: FC<CheckoutItemProps> = memo(({ item }) => {
   const dispatch = useAppDispatch();
 
   const { imageUrl, name, quantity, price } = item;
@@ -42,4 +42,4 @@ export const CheckoutItem: FC<CheckoutItemProps> = ({ item }) => {
       <Divider />
     </S.Wrapper>
   );
-};
+});

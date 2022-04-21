@@ -1,5 +1,7 @@
 import { Checkout } from '../components/cart/checkout/Checkout/Checkout';
 
-export const CheckoutPage = () => {
+const CheckoutPage = () => {
   return <Checkout />;
 };
+
+export default CheckoutPage;

@@ -3,7 +3,7 @@ import { useAppDispatch } from '../hooks/redux-hooks';
 import { fetchCollections } from '../store/slices/collections/collectionsSlice';
 import { Home } from '../components/home/Home/Home';
 
-export const HomePage = () => {
+const HomePage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -12,3 +12,5 @@ export const HomePage = () => {
 
   return <Home />;
 };
+
+export default HomePage;

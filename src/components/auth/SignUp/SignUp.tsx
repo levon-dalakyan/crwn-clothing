@@ -1,4 +1,4 @@
-import { Form, Input } from 'antd';
+import { Form } from 'antd';
 import {
   createUserWithEmailAndPassword,
   AuthError,
@@ -10,6 +10,7 @@ import { auth, createUserProfileDocument } from '../../../utils/firebase-utils';
 import { showNotification } from '../../../utils/notification-utils';
 import { Button } from '../../common/Button/Button';
 import { Title } from '../../common/Title/Title';
+import { Input, InputPassword } from '../../common/Input/Input.styles';
 import * as S from './SignUp.styles';
 
 interface IFormValues {
@@ -68,7 +69,7 @@ export const SignUp = () => {
           name="displayName"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
-          <Input className="input" placeholder="Name" />
+          <Input placeholder="Name" />
         </S.StyledFormItem>
         <S.StyledFormItem
           name="email"
@@ -77,19 +78,19 @@ export const SignUp = () => {
             { required: true, message: 'Please input your email!' },
           ]}
         >
-          <Input className="input" placeholder="Email" />
+          <Input placeholder="Email" />
         </S.StyledFormItem>
         <S.StyledFormItem
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.Password className="input" placeholder="Password" />
+          <InputPassword placeholder="Password" />
         </S.StyledFormItem>
         <S.StyledFormItem
           name="confirmPassword"
           rules={[{ required: true, message: 'Please confirm your password!' }]}
         >
-          <Input.Password className="input" placeholder="Confirm Password" />
+          <InputPassword placeholder="Confirm Password" />
         </S.StyledFormItem>
         <Button type="default" htmlType="submit">
           SIGN UP

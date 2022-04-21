@@ -1,4 +1,4 @@
-import { Row, Form, Input } from 'antd';
+import { Row, Form } from 'antd';
 import {
   AuthError,
   AuthErrorCodes,
@@ -14,6 +14,7 @@ import {
 import { setCurrentUser } from '../../../store/slices/user/userSlice';
 import { BUTTON_STYLE_CLASSES, Button } from '../../common/Button/Button';
 import { Title } from '../../common/Title/Title';
+import { Input, InputPassword } from '../../common/Input/Input.styles';
 import * as S from './SignIn.styles';
 
 interface IFormValues {
@@ -71,7 +72,7 @@ export const SignIn = () => {
             { required: true, message: 'Please input your email' },
           ]}
         >
-          <Input className="input" placeholder="Email" />
+          <Input placeholder="Email" />
         </S.StyledFormItem>
         <S.StyledFormItem
           name="password"
@@ -82,11 +83,7 @@ export const SignIn = () => {
             },
           ]}
         >
-          <Input.Password
-            className="input"
-            placeholder="Password"
-            visibilityToggle
-          />
+          <InputPassword placeholder="Password" />
         </S.StyledFormItem>
         <Row justify="space-between" align="middle">
           <Button type="default" htmlType="submit">

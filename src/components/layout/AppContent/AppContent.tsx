@@ -1,4 +1,4 @@
-import Layout, { Content } from 'antd/lib/layout/layout';
+import { Layout } from 'antd';
 import { Navigation } from '../../../components/layout/Navigation/Navigation';
 import { AppRoutes } from '../../../components/layout/AppRoutes/AppRoutes';
 import * as S from './AppContent.styles';
@@ -9,9 +9,9 @@ export const AppContent = () => {
       <S.Header>
         <Navigation />
       </S.Header>
-      <Content>
+      <Layout.Content>
         <AppRoutes />
-      </Content>
+      </Layout.Content>
     </Layout>
   );
 };
