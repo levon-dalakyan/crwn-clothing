@@ -12,12 +12,12 @@ export const Navigation = () => {
 
   return (
     <S.Wrapper justify="space-between" align="middle">
-      <Col span={12}>
+      <Col xxl={{ span: 12 }} md={{ span: 6 }}>
         <Link to="/">
           <Logo />
         </Link>
       </Col>
-      <Col span={12}>
+      <Col xxl={{ span: 12 }} md={{ span: 18 }}>
         <S.Options justify="end" align="middle">
           <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (

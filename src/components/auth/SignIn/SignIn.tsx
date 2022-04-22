@@ -1,4 +1,4 @@
-import { Row, Form } from 'antd';
+import { Row, Col, Form } from 'antd';
 import {
   AuthError,
   AuthErrorCodes,
@@ -15,7 +15,11 @@ import { setCurrentUser } from '../../../store/slices/user/userSlice';
 import { BUTTON_STYLE_CLASSES, Button } from '../../common/Button/Button';
 import { Title } from '../../common/Title/Title';
 import { Input, InputPassword } from '../../common/Input/Input.styles';
-import * as S from './SignIn.styles';
+import {
+  CommonFormSubtitle,
+  CommonFormWrapper,
+  CommonStyledFormItem,
+} from '../Auth/Auth.styles';
 
 interface IFormValues {
   email: string;
@@ -61,11 +65,13 @@ export const SignIn = () => {
   };
 
   return (
-    <S.Wrapper>
+    <CommonFormWrapper>
       <Title>I already have an account</Title>
-      <S.Subtitle>Sign in with your email and password</S.Subtitle>
+      <CommonFormSubtitle>
+        Sign in with your email and password
+      </CommonFormSubtitle>
       <Form form={form} onFinish={formSubmitHandler}>
-        <S.StyledFormItem
+        <CommonStyledFormItem
           name="email"
           rules={[
             { type: 'email', message: 'The input is not valid Email' },
@@ -73,8 +79,8 @@ export const SignIn = () => {
           ]}
         >
           <Input placeholder="Email" />
-        </S.StyledFormItem>
-        <S.StyledFormItem
+        </CommonStyledFormItem>
+        <CommonStyledFormItem
           name="password"
           rules={[
             {
@@ -84,7 +90,7 @@ export const SignIn = () => {
           ]}
         >
           <InputPassword placeholder="Password" />
-        </S.StyledFormItem>
+        </CommonStyledFormItem>
         <Row justify="space-between" align="middle">
           <Button type="default" htmlType="submit">
             SIGN IN
@@ -99,6 +105,6 @@ export const SignIn = () => {
           </Button>
         </Row>
       </Form>
-    </S.Wrapper>
+    </CommonFormWrapper>
   );
 };

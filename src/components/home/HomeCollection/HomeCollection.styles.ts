@@ -8,6 +8,16 @@ export const Wrapper = styled(Row)<{ large?: string | undefined }>`
   margin: 0px 7.5px 15px;
   overflow: hidden;
   cursor: pointer;
+
+  @media screen and (max-width: 600px) {
+    min-width: 45%;
+    height: 260px;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    height: 260px;
+  }
 `;
 
 export const BackgroundImage = styled.div<{ imageUrl: string }>`
@@ -33,6 +43,11 @@ export const Content = styled(Row)`
 
   ${Wrapper}:hover & {
     opacity: 0.9;
+  }
+
+  @media screen and (max-width: 800px) and (min-width: 450px) {
+    padding: 0 5px;
+    height: 80px;
   }
 `;
 

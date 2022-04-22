@@ -11,7 +11,11 @@ import { showNotification } from '../../../utils/notification-utils';
 import { Button } from '../../common/Button/Button';
 import { Title } from '../../common/Title/Title';
 import { Input, InputPassword } from '../../common/Input/Input.styles';
-import * as S from './SignUp.styles';
+import {
+  CommonFormSubtitle,
+  CommonFormWrapper,
+  CommonStyledFormItem,
+} from '../Auth/Auth.styles';
 
 interface IFormValues {
   displayName: string;
@@ -61,17 +65,19 @@ export const SignUp = () => {
   };
 
   return (
-    <S.Wrapper>
+    <CommonFormWrapper>
       <Title>I don't have an account</Title>
-      <S.Subtitle>Sign up with your email and password</S.Subtitle>
+      <CommonFormSubtitle>
+        Sign up with your email and password
+      </CommonFormSubtitle>
       <Form form={form} onFinish={formSubmitHandler}>
-        <S.StyledFormItem
+        <CommonStyledFormItem
           name="displayName"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
           <Input placeholder="Name" />
-        </S.StyledFormItem>
-        <S.StyledFormItem
+        </CommonStyledFormItem>
+        <CommonStyledFormItem
           name="email"
           rules={[
             { type: 'email', message: 'The input is not valid e-mail!' },
@@ -79,23 +85,23 @@ export const SignUp = () => {
           ]}
         >
           <Input placeholder="Email" />
-        </S.StyledFormItem>
-        <S.StyledFormItem
+        </CommonStyledFormItem>
+        <CommonStyledFormItem
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
           <InputPassword placeholder="Password" />
-        </S.StyledFormItem>
-        <S.StyledFormItem
+        </CommonStyledFormItem>
+        <CommonStyledFormItem
           name="confirmPassword"
           rules={[{ required: true, message: 'Please confirm your password!' }]}
         >
           <InputPassword placeholder="Confirm Password" />
-        </S.StyledFormItem>
+        </CommonStyledFormItem>
         <Button type="default" htmlType="submit">
           SIGN UP
         </Button>
       </Form>
-    </S.Wrapper>
+    </CommonFormWrapper>
   );
 };

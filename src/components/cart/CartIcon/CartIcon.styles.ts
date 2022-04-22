@@ -7,6 +7,10 @@ export const Wrapper = styled(Row)`
   height: 45px;
   margin-left: 40px;
   cursor: pointer;
+
+  @media screen and (max-width: 370px) {
+    margin-left: 20px;
+  }
 `;
 
 export const ShoppingBagIcon = styled(ShoppingBag)`

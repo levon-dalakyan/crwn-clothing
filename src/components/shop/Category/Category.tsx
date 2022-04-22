@@ -9,7 +9,7 @@ interface CategoryProps {
 
 export const Category: FC<CategoryProps> = ({ products }) => {
   return (
-    <S.Items gutter={[0, 60]}>
+    <S.Items>
       {products.map((product) => (
         <CategoryItem key={product.id} product={product} />
       ))}

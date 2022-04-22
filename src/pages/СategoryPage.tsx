@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { Row } from 'antd';
 import { useAppSelector } from '../hooks/redux-hooks';
 import { Title } from '../components/common/Title/Title';
 import { Category } from '../components/shop/Category/Category';
@@ -19,7 +20,9 @@ export const CategoryPage = () => {
 
   return (
     <>
-      <Title>{category.toUpperCase()}</Title>
+      <Row justify="center">
+        <Title>{category.toUpperCase()}</Title>
+      </Row>
       <Category products={products} />
     </>
   );

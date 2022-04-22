@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useAppSelector } from '../../../../hooks/redux-hooks';
 import { selectCurrentUser } from '../../../../store/slices/user/userSelectors';
 import { selectCartTotalPrice } from '../../../../store/slices/cart/cartSelectors';
