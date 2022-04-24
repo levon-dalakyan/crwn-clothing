@@ -19,7 +19,6 @@ export const CommonFormWrapper = styled.div`
 
   @media screen and (max-width: 1000px) {
     width: 60%;
-    text-align: center;
     margin: 0 auto 60px auto;
   }
 

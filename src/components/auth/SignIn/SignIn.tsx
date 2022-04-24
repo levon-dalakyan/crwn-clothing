@@ -1,4 +1,4 @@
-import { Row, Col, Form } from 'antd';
+import { Row, Form } from 'antd';
 import {
   AuthError,
   AuthErrorCodes,

@@ -6,6 +6,7 @@ export const Wrapper = styled(Row)`
   line-height: 20px;
 
   @media screen and (max-width: 500px) {
-    font-size: 17px;
+    font-size: 14px;
+    line-height: 16px;
   }
 `;
