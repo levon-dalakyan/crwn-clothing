@@ -27,9 +27,11 @@ export const BackgroundImage = styled.div<{ imageUrl: string }>`
   background-position: center;
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 
-  ${Wrapper}:hover & {
-    transform: scale(1.1);
-    transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+  @media screen and (min-width: 800px) {
+    ${Wrapper}:hover & {
+      transform: scale(1.1);
+      transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
   }
 `;
 

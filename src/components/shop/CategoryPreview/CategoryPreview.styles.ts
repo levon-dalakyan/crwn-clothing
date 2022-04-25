@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Row } from 'antd';
 
 export const Wrapper = styled.div`
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   text-align: center;
 
   @media screen and (max-width: 800px) {
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     margin-bottom: 20px;
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 450px) {s
     margin-bottom: 10px;
   }
 `;

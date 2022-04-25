@@ -6,9 +6,9 @@ export const CollectionItemWrapper = styled(Row)`
   width: 20vw;
   position: relative;
   margin: 0 auto;
+  margin-bottom: 50px;
 
   @media screen and (max-width: 800px) {
-    margin-bottom: 50px;
     width: 40vw;
   }
 `;
